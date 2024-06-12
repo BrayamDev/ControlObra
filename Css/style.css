@@ -1,0 +1,156 @@
+/**FONT AWESOME**/
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --colorPrimario: #0F5375;
+    --colorSecundario: #3C4857;
+    --colorTerceario: #1D9AD6;
+    --colorOscuro: #262626;
+    --colorBlanco: #ffff;
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(230, 233, 235);
+}
+
+/**INICIO DE SESION**/
+
+.contenedor__titulo {
+    background-color: var(--colorSecundario);
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    font-weight: 700;
+    color: var(--colorBlanco);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.contenedor__titulo p {
+    font-size: 15px;
+    text-transform: uppercase;
+    text-align: end;
+}
+
+.contenedor__titulo--login {
+    background-color: var(--colorSecundario);
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    font-weight: 700;
+    color: var(--colorBlanco);
+    text-transform: uppercase;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+
+}
+
+.contenedor__titulo--login h1 {
+    width: 100%;
+    margin-left: 700px;
+}
+
+.seccion__inicio__sesion {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.seccion__inicio__sesion .imagen__fondo {
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+
+.seccion__inicio__sesion .imagen__fondo img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.seccion__inicio__sesion .contenido__inicio__sesion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.seccion__inicio__sesion .contenido__inicio__sesion .formulario__inicio__sesion {
+    width: 40%;
+}
+
+.seccion__inicio__sesion .contenido__inicio__sesion .formulario__inicio__sesion h2 {
+    color: var(--colorOscuro);
+    font-weight: 700;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-bottom: 4px solid var(--colorPrimario);
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+.seccion__inicio__sesion .contenido__inicio__sesion .formulario__inicio__sesion .caja__formulario {
+    margin-bottom: 1rem;
+}
+
+.seccion__inicio__sesion .contenido__inicio__sesion .formulario__inicio__sesion .caja__formulario span {
+    font-size: 20px;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: var(--colorOscuro);
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.seccion__inicio__sesion .contenido__inicio__sesion .formulario__inicio__sesion .caja__formulario input {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    font-weight: 400;
+    border: 1px solid #262626;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #262626;
+    background: transparent;
+    border-radius: 10px;
+}
+
+.caja__formulario--botones {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: start;
+    text-align: center;
+}
+
+/*valdiaciones*/
+
+.form-control.success input{
+    border-color: #09c372;
+}
+
+.form-control.error input{
+    border-color: #ff3860;
+}
+
+.form-control .error{
+    color: #ff3860;
+    font-size: 20px;
+    height: 13px;
+}
+
