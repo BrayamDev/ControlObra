@@ -69,7 +69,7 @@ while ($resultado = mysqli_fetch_array($consulta))
     <?php include "../Global/HeaderGlobal.php" ?>
     <div class="control__partida--links">
         <nav>
-            <form action="../Estimaciones/EstimacionPesosBack.php" method="POST">
+            <form action="../Estimaciones/EstimacionDolaresBack.php" method="POST">
                 <div class="text-white" style="background-color: #3C4857;">
                     <div class="container">
                         <div class="row p-3">
@@ -80,7 +80,7 @@ while ($resultado = mysqli_fetch_array($consulta))
                                             $("#cbx_concepto").change(function() {
                                                 $("#cbx_concepto option:selected").each(function() {
                                                     id_contratista = $(this).val();
-                                                    $.post("subcontpesos.php", {
+                                                    $.post("subcontdolares.php", {
                                                         id_contratista: id_contratista
                                                     }, function(data) {
                                                         $("#cbx_subconcepto").html(data);
@@ -115,56 +115,61 @@ while ($resultado = mysqli_fetch_array($consulta))
                             </div>
                             <div class="col">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" placeholder="Importe pesos" name="importepesos">
+                                    <input class="form-control" type="text" placeholder="Importe Dolares" name="importedolares">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" placeholder="Amortizacion Pesos" name="amortizacionpesos">
+                                    <input class="form-control" type="text" placeholder="Amortizacion Dolares" name="amortizaciondolares">
                                 </div>
                             </div>
                         </div>
                         <div class="row p-3">
                             <div class="col">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" placeholder="F.G. Pesos" name="fgpesos">
+                                    <input class="form-control" type="text" placeholder="F.G. Dolares" name="fgdolares">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" placeholder="Factura pesos" name="facturapesos">
+                                    <input class="form-control" type="text" placeholder="Factura Dolares" name="facturadolares">
                                 </div>
                             </div>
                         </div>
                         <div class="text-center p-2">
-                            <button class="form-control btn btn-primary" name="btnInsertarEstimacionPesos" type="submit">Insertar Estimacion</button>
+                            <button class="form-control btn btn-primary" name="btnInsertarEstimacionDolares" type="submit">Insertar Estimacion</button>
                         </div>
                     </div>
                 </div>
         </nav>
     </div>
-    <?php if (isset($_GET['estimacionSuccess'])) { ?>
-        <div class="alert alert-success text-center" role="alert" style="background-color: green; color:aliceblue;">
-            <?php echo $_GET['estimacionSuccess'];
-            $Contrato = $_SESSION['contrato'];
-            ?>
-        </div>
-    <?php
-    }
-   
+    <div class="container p-2">
+        <?php if (isset($_GET['estimacionSuccess'])) { ?>
+            <div class="alert alert-success text-center" role="alert" style="background-color: green; color:aliceblue;">
+                <?php echo $_GET['estimacionSuccess'];
+                $Contrato = $_SESSION['contrato'];
+                ?>
+            </div>
+        <?php
+        }
 
-    ?>
-    <?php if (isset($_GET['estimacionError'])) { ?>
-        <div class="alert alert-error text-center" role="alert" style="background-color: green; color:aliceblue;">
-            <?php echo $_GET['estimacionError'] ?>
-        </div>
-    <?php
-    }
-    
-    if ($Contrato != "") {
-        
-   
-    ?>
+        ?>
+        <?php if (isset($_GET['estimacionError'])) { ?>
+            <div class="alert alert-error text-center" role="alert" style="background-color: red; color:aliceblue;">
+                <?php echo $_GET['estimacionError'] ,
+                
+                $Contrato = $_SESSION['contrato'];
+                ?>
+            </div>
+        <?php
+        }
+
+        if ($Contrato != "") {
+
+
+        ?>
+    </div>
+
     <br>
     <div class="container">
         <table class="table text-center" id="idTabla">
@@ -173,10 +178,11 @@ while ($resultado = mysqli_fetch_array($consulta))
                     <th class="table__head">Estimación</th>
                     <th class="table__head">Concepto</th>
                     <th class="table__head">SubConcepto</th>
-                    <th class="table__head">Importe Pesos</th>
-                    <th class="table__head">Anticipo Pesos</th>
-                    <th class="table__head">F.G. Pesos</th>
-                    <th class="table__head">Importe Pagado Pesos</th>
+                    <th class="table__head">Numero de factura</th>
+                    <th class="table__head">Importe Dolares</th>
+                    <th class="table__head">Anticipo Dolares</th>
+                    <th class="table__head">F.G. Dolares</th>
+                    <th class="table__head">Importe Pagado Dolares</th>
                     <th class="table__head">Editar</th>
                     <th class="table__head">Eliminar</th>
                 </tr>
@@ -200,30 +206,36 @@ while ($resultado = mysqli_fetch_array($consulta))
                 $resultadoSubconcepto = mysqli_query($conexion, "SELECT * FROM subconcepto WHERE id_subconcepto = '$idSubconcepto' AND id_obra = '$idObra'");
                 $consulta2 = mysqli_fetch_array($resultadoSubconcepto);
                 $Subconcepto = $consulta2['subconcepto'];
+                $resultadoSubconcepto = mysqli_query($conexion, "SELECT * FROM subconcepto WHERE id_subconcepto = '$idSubconcepto' AND id_obra = '$idObra'");
+                $consulta2 = mysqli_fetch_array($resultadoSubconcepto);
+                $Subconcepto = $consulta2['subconcepto'];
                 $resultadoidContratista = mysqli_query($conexion, "SELECT * FROM contrato WHERE id_obra = '$idObra' AND id_concepto = '$idConcepto' AND id_subconcepto = '$idSubconcepto'");
                 $consulta3 = mysqli_fetch_array($resultadoidContratista);
                 $idcontratista = $consulta3['id_contratista'];
+
+
+
                 $resultadoContratista = mysqli_query($conexion, "SELECT * FROM contratista WHERE id_obra = '$idObra' AND id_contratista = '$idcontratista'");
                 $consulta4 = mysqli_fetch_array($resultadoContratista);
                 $contratista = $consulta4['aliascontratista'];
-
+                // $resultadoEstimacionId = mysqli_query($conexion, "SELECT * FROM estimacion");
 
                 ?>
- 
+
                 <tr>
                     <td class="table__data"><?php echo "ANTICIPO"; ?></td>
                     <td class="table__data"><?php echo $Concepto; ?></td>
                     <td class="table__data"><?php echo $Subconcepto; ?></td>
-                    <td class="table__data"><?php echo number_format($importePesos); ?></td>
-                    <td class="table__data"><?php echo $anticipoPesos; ?></td>
-                    <td class="table__data"><?php echo $fgPesos; ?></td>
-                    <td class="table__data"><?php echo $anticipoPesos; ?></td>
+                    <td class="table__data"><?php echo number_format($importeDolares); ?></td>
+                    <td class="table__data"><?php echo $anticipoDolares; ?></td>
+                    <td class="table__data"><?php echo $fgDolares; ?></td>
+                    <td class="table__data"><?php echo $anticipoDolares; ?></td>
                     <td class="table__data">
 
                         <a href="" class="btn-sm btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
                     </td>
                     <td class="table__data">
-                        <a href="" class="btn-sm btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        <a href="#" class="btn-sm btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
 
@@ -231,47 +243,54 @@ while ($resultado = mysqli_fetch_array($consulta))
                 <?php
                 $resultadoEstimacion = mysqli_query($conexion, "SELECT * FROM estimacion WHERE id_obra = '$idObra' and id_contrato = $Contrato  ORDER BY numestimacion");
                 while ($consulta5 = mysqli_fetch_array($resultadoEstimacion)) {
-                    $importePesosEstimacion = $consulta5['importe_pesos'];
-                    $amortPesosEstimacion = $consulta5['amort_pesos'];
-                    $fgPesosEstimacion = $consulta5['fg_pesos'];
-                    $numPesosEstimacion = $consulta5['numestimacion'];
-                    $importePagado = $importePesosEstimacion - $amortPesosEstimacion - $fgPesosEstimacion
-                ?>
-                    <tr>
-                        <td class="table__data"><?php echo $numPesosEstimacion; ?></td>
-                        <td class="table__data"><?php echo $Concepto; ?></td>
-                        <td class="table__data"><?php echo $Subconcepto; ?></td>
-                        <td class="table__data"><?php echo number_format($importePesosEstimacion); ?></td>
-                        <td class="table__data"><?php echo number_format($amortPesosEstimacion); ?></td>
-                        <td class="table__data"><?php echo number_format($fgPesosEstimacion); ?></td>
-                        <td class="table__data"><?php echo number_format($importePagado); ?></td>
-                        <td class="table__data">
+                    $importeDolaresEstimacion = $consulta5['importe_dolares'];
+                    $amortDolaresEstimacion = $consulta5['amort_dolares'];
+                    $fgDolaresEstimacion = $consulta5['fg_dolares'];
+                    $factura_dolares = $consulta5['factura_dolares'];
+                    $numDolaresEstimacion = $consulta5['numestimacion'];
+                    $importePagado = $importeDolaresEstimacion - $amortDolaresEstimacion - $fgDolaresEstimacion;
+                    $facturaDolares = $consulta5['factura_dolares'];
 
-                            <a href="" class="btn-sm btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
-                        </td>
-                        <td class="table__data">
-                            <a href="" class="btn-sm btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-                    </tr>
-                <?php } ?>
+                    if ($importeDolaresEstimacion != 0) {
+                ?>
+
+                        <tr>
+                            <td class="table__data"><?php echo $numDolaresEstimacion; ?></td>
+                            <td class="table__data"><?php echo $Concepto; ?></td>
+                            <td class="table__data"><?php echo $Subconcepto; ?></td>
+                            <td class="table__data"><?php echo $facturaDolares; ?></td>
+                            <td class="table__data"><?php echo number_format($importeDolaresEstimacion); ?></td>
+                            <td class="table__data"><?php echo number_format($amortDolaresEstimacion); ?></td>
+                            <td class="table__data"><?php echo number_format($fgDolaresEstimacion); ?></td>
+                            <td class="table__data"><?php echo number_format($importePagado); ?></td>
+                            <td class="table__data">
+
+                                <a href="" class="btn-sm btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+                            </td>
+                            <td class="table__data">
+                                <a href="EliminarEstimacionDolares.php?id=<?php echo $consulta5['id_estimacion'] ?>" class="btn-sm btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                <?php }
+                } ?>
             </tbody>
         </table>
     </div>
-    <?php } ?>
-   <!--Jquery-->
-   <script src="../Js/jquery.js"></script>
-    <script src="../Js/Script.js"></script>
-    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#idTabla').DataTable({
+<?php } ?>
+<!--Jquery-->
+<script src="../Js/jquery.js"></script>
+<script src="../Js/Script.js"></script>
+<script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#idTabla').DataTable({
 
-            });
-        })
-    </script>
-    <!--boostrap5-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+        });
+    })
+</script>
+<!--boostrap5-->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
 
 </html>

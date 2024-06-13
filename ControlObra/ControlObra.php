@@ -97,7 +97,7 @@ $idObra = $_SESSION['id_obra'];
                         <a href="../Estimaciones/ConsultaEstimaciones.php" class="btn btn-primary btn-sm">Consultar Pesos</a>
                         <a href="../Estimaciones/ConsultaEstimaciones.php" class="btn btn-primary btn-sm">Consultar Dolares</a>
                         <a href="../Estimaciones/AplicarEstimaciones.php" class="btn btn-primary btn-sm" class="btn btn-primary">Aplicar Pesos</a>
-                        <a href="../Estimaciones/AplicarEstimaciones.php" class="btn btn-primary btn-sm" class="btn btn-primary">Aplicar Dolares</a>
+                        <a href="../Estimaciones/AplicarEstimacionesdolares.php" class="btn btn-primary btn-sm" class="btn btn-primary">Aplicar Dolares</a>
                     </div>
 
                 </div>
