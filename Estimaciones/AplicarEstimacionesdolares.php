@@ -9,9 +9,7 @@ $idObra = $_SESSION['id_obra'];
 $Contrato = "";
 
 $consulta = mysqli_query($conexion, "SELECT * FROM  contrato");
-
 while ($resultado = mysqli_fetch_array($consulta))
-
 
 ?>
 
@@ -34,7 +32,6 @@ while ($resultado = mysqli_fetch_array($consulta))
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="imagenes/favicon.png">
     <script language="javascript" src="../js/jquery-3.1.1.min.js"></script>
-
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
 </head>
 
@@ -115,6 +112,13 @@ while ($resultado = mysqli_fetch_array($consulta))
                             </div>
                             <div class="col">
                                 <div class="input-group">
+                                    <button class="form-control btn btn-primary" name="btnInsertarEstimacionDolares" type="submit">Consulta Estimacion</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row p-3">
+                            <div class="col">
+                                <div class="input-group">
                                     <input class="form-control" type="text" placeholder="Importe Dolares" name="importedolares">
                                 </div>
                             </div>
@@ -123,8 +127,6 @@ while ($resultado = mysqli_fetch_array($consulta))
                                     <input class="form-control" type="text" placeholder="Amortizacion Dolares" name="amortizaciondolares">
                                 </div>
                             </div>
-                        </div>
-                        <div class="row p-3">
                             <div class="col">
                                 <div class="input-group">
                                     <input class="form-control" type="text" placeholder="F.G. Dolares" name="fgdolares">
@@ -135,9 +137,11 @@ while ($resultado = mysqli_fetch_array($consulta))
                                     <input class="form-control" type="text" placeholder="Factura Dolares" name="facturadolares">
                                 </div>
                             </div>
-                        </div>
-                        <div class="text-center p-2">
-                            <button class="form-control btn btn-primary" name="btnInsertarEstimacionDolares" type="submit">Insertar Estimacion</button>
+                            <div class="col">
+                                <div class="input-group">
+                                    <button class="form-control btn btn-primary" name="btnInsertarEstimacionDolares" type="submit">Insertar Estimacion</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,30 +150,25 @@ while ($resultado = mysqli_fetch_array($consulta))
     <div class="container p-2">
         <?php if (isset($_GET['estimacionSuccess'])) { ?>
             <div class="alert alert-success text-center" role="alert" style="background-color: green; color:aliceblue;">
-                <?php echo $_GET['estimacionSuccess'];
-                $Contrato = $_SESSION['contrato'];
+                <?php $Contrato = $_SESSION['contrato'];
+                echo $_GET['estimacionSuccess'];
                 ?>
             </div>
         <?php
         }
-
         ?>
         <?php if (isset($_GET['estimacionError'])) { ?>
-            <div class="alert alert-error text-center" role="alert" style="background-color: red; color:aliceblue;">
-                <?php echo $_GET['estimacionError'] ,
-                
-                $Contrato = $_SESSION['contrato'];
+            <div class="alert alert-error text-center" role="alert" style="background-color: green; color:aliceblue;">
+                <?php $Contrato = $_SESSION['contrato'];
+                echo $_GET['estimacionError'];
                 ?>
             </div>
         <?php
         }
 
         if ($Contrato != "") {
-
-
         ?>
     </div>
-
     <br>
     <div class="container">
         <table class="table text-center" id="idTabla">
@@ -178,7 +177,7 @@ while ($resultado = mysqli_fetch_array($consulta))
                     <th class="table__head">Estimación</th>
                     <th class="table__head">Concepto</th>
                     <th class="table__head">SubConcepto</th>
-                    <th class="table__head">Numero de factura</th>
+                    <th class="table__head">Número de Factura</th>
                     <th class="table__head">Importe Dolares</th>
                     <th class="table__head">Anticipo Dolares</th>
                     <th class="table__head">F.G. Dolares</th>
@@ -188,7 +187,6 @@ while ($resultado = mysqli_fetch_array($consulta))
                 </tr>
             </thead>
             <tbody>
-
                 <?php
                 $resultadoContrato = mysqli_query($conexion, "SELECT * FROM contrato WHERE id_obra = '$idObra' and id_contrato = $Contrato");
                 $consulta = mysqli_fetch_array($resultadoContrato);
@@ -200,75 +198,64 @@ while ($resultado = mysqli_fetch_array($consulta))
                 $anticipoDolares = $consulta['anticipo_dolares'];
                 $fgPesos = $consulta['fgpesos'];
                 $fgDolares = $consulta['fgdolares'];
+                $numerofactura = $consulta['facturaDolares'];
                 $resultadoConcepto = mysqli_query($conexion, "SELECT * FROM concepto WHERE id_concepto = '$idConcepto' AND id_obra = '$idObra'");
                 $consulta1 = mysqli_fetch_array($resultadoConcepto);
                 $Concepto = $consulta1['concepto'];
                 $resultadoSubconcepto = mysqli_query($conexion, "SELECT * FROM subconcepto WHERE id_subconcepto = '$idSubconcepto' AND id_obra = '$idObra'");
                 $consulta2 = mysqli_fetch_array($resultadoSubconcepto);
                 $Subconcepto = $consulta2['subconcepto'];
-                $resultadoSubconcepto = mysqli_query($conexion, "SELECT * FROM subconcepto WHERE id_subconcepto = '$idSubconcepto' AND id_obra = '$idObra'");
-                $consulta2 = mysqli_fetch_array($resultadoSubconcepto);
-                $Subconcepto = $consulta2['subconcepto'];
                 $resultadoidContratista = mysqli_query($conexion, "SELECT * FROM contrato WHERE id_obra = '$idObra' AND id_concepto = '$idConcepto' AND id_subconcepto = '$idSubconcepto'");
                 $consulta3 = mysqli_fetch_array($resultadoidContratista);
                 $idcontratista = $consulta3['id_contratista'];
-
-
-
                 $resultadoContratista = mysqli_query($conexion, "SELECT * FROM contratista WHERE id_obra = '$idObra' AND id_contratista = '$idcontratista'");
                 $consulta4 = mysqli_fetch_array($resultadoContratista);
                 $contratista = $consulta4['aliascontratista'];
-                // $resultadoEstimacionId = mysqli_query($conexion, "SELECT * FROM estimacion");
-
                 ?>
-
                 <tr>
                     <td class="table__data"><?php echo "ANTICIPO"; ?></td>
                     <td class="table__data"><?php echo $Concepto; ?></td>
                     <td class="table__data"><?php echo $Subconcepto; ?></td>
+                    <td class="table__data"><?php echo $numerofactura; ?></td>
                     <td class="table__data"><?php echo number_format($importeDolares); ?></td>
-                    <td class="table__data"><?php echo $anticipoDolares; ?></td>
-                    <td class="table__data"><?php echo $fgDolares; ?></td>
-                    <td class="table__data"><?php echo $anticipoDolares; ?></td>
-                    <td class="table__data">
+                    <td class="table__data"><?php echo number_format($anticipoDolares); ?></td>
+                    <td class="table__data"><?php echo number_format($fgDolares); ?></td>)
+                    <td class="table__data"><?php echo number_format($anticipoDolares); ?></td>
 
+                    <td class="table__data">
                         <a href="" class="btn-sm btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
                     </td>
                     <td class="table__data">
-                        <a href="#" class="btn-sm btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        <a href="" class="btn-sm btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
-
-
                 <?php
                 $resultadoEstimacion = mysqli_query($conexion, "SELECT * FROM estimacion WHERE id_obra = '$idObra' and id_contrato = $Contrato  ORDER BY numestimacion");
                 while ($consulta5 = mysqli_fetch_array($resultadoEstimacion)) {
                     $importeDolaresEstimacion = $consulta5['importe_dolares'];
                     $amortDolaresEstimacion = $consulta5['amort_dolares'];
                     $fgDolaresEstimacion = $consulta5['fg_dolares'];
-                    $factura_dolares = $consulta5['factura_dolares'];
                     $numDolaresEstimacion = $consulta5['numestimacion'];
+                    $numerofactura = $consulta5['factura_dolares'];
                     $importePagado = $importeDolaresEstimacion - $amortDolaresEstimacion - $fgDolaresEstimacion;
-                    $facturaDolares = $consulta5['factura_dolares'];
 
                     if ($importeDolaresEstimacion != 0) {
                 ?>
-
                         <tr>
                             <td class="table__data"><?php echo $numDolaresEstimacion; ?></td>
                             <td class="table__data"><?php echo $Concepto; ?></td>
                             <td class="table__data"><?php echo $Subconcepto; ?></td>
-                            <td class="table__data"><?php echo $facturaDolares; ?></td>
+                            <td class="table__data"><?php echo $numerofactura; ?></td>
                             <td class="table__data"><?php echo number_format($importeDolaresEstimacion); ?></td>
                             <td class="table__data"><?php echo number_format($amortDolaresEstimacion); ?></td>
                             <td class="table__data"><?php echo number_format($fgDolaresEstimacion); ?></td>
                             <td class="table__data"><?php echo number_format($importePagado); ?></td>
                             <td class="table__data">
 
-                                <a href="" class="btn-sm btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+                                <a href="AplicarEstimacionesDolaresEditar.php?id=<?php echo $consulta5['id_estimacion']?>" class="btn-sm btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
                             </td>
                             <td class="table__data">
-                                <a href="EliminarEstimacionDolares.php?id=<?php echo $consulta5['id_estimacion'] ?>" class="btn-sm btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                <a href="EliminarEstimacionDolares.php?id=<?php echo $consulta5['id_estimacion'] ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                 <?php }
@@ -280,6 +267,7 @@ while ($resultado = mysqli_fetch_array($consulta))
 <!--Jquery-->
 <script src="../Js/jquery.js"></script>
 <script src="../Js/Script.js"></script>
+
 <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
 <script>
     $(document).ready(function() {

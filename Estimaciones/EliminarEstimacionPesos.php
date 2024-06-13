@@ -16,7 +16,6 @@
     $SQL = "DELETE FROM estimacion WHERE id_estimacion = '$id'";
     $query = mysqli_query($conexion,$SQL);
 
-    header("Location: AplicarEstimacionesdolares.php?estimacionError=Estimacion de dolares eliminada correctamente");
+    header("Location: AplicarEstimaciones.php?estimacionError=Estimacion de pesos eliminada correctamente");
     exit();
-
 
