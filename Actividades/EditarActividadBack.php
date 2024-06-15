@@ -19,7 +19,7 @@ AND actividad = '$actividad' AND fechaInicial = '$fechaInicial' AND fechaFinal =
 AND responsableActividad = '$responsableActividad'");
 
 $sql = "UPDATE actividad 
-    SET actividad='$actividad', fechaInicial='$fechaInicial', fechaFinal='$fechaFinal', responsableActividad='$responsableActividad' WHERE id_actividad = '$id_actividad'";
+    SET actividad='$actividad', fechaInicial='$fechaInicial', fechaFinal='$fechaFinal', responsableActividad='$responsableActividad' WHERE id_actividad = '$id_actividad' AND id_obra = '$idObra'";
 $query = mysqli_query($conexion, $sql);
 
 if ($query) {

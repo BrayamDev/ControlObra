@@ -67,7 +67,7 @@ $fila = mysqli_fetch_array($queryActividad);
                 </div>
             </div>
             <div class="card-body">
-                <form action="EditarActividadBack.php" method="post">
+                <form action="EditarEstimacionDolaresBack.php" method="post">
                         <div class="container p-1 mb-1">
                             <?php if (isset($_GET['actividadSuccessEditar'])) { ?>
                                 <div class="alert alert-success text-center" role="alert" style="background-color: green; color:aliceblue;">
@@ -85,7 +85,7 @@ $fila = mysqli_fetch_array($queryActividad);
                             ?>
                         </div>
                         <div class="row">
-                        <input class="form-control" type="hidden"  value="<?php echo $fila['id_estimacion'] ?>" placeholder="Alias Contratista" name="id_contratista">
+                        <input class="form-control" type="hidden"  value="<?php echo $fila['id_estimacion'] ?>"  name="id_estimacion">
                         <div class="col">
                         <label for="">Num estimacion dolares</label>
                             <div class="input-group">
