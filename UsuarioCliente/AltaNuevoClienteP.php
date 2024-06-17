@@ -12,8 +12,8 @@ $alias = $_SESSION['alias'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <!--Iconosboostrap5-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!--CSS ESTILOS-->
-    <!--<link rel="stylesheet" href="../Css/style.css">-->
+    <!--CSS-->
+    <link rel="stylesheet" href="../Css/estilos.css">
     <!--Boostrap5-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <title>Alta nuevo usuario</title>
@@ -22,13 +22,15 @@ $alias = $_SESSION['alias'];
 <body>
     <div class="d-flex botones p-1">
         <div class="me-auto p-2">
-            <a href="" class="btn btn-light btn-sm">Usuario: <strong>
-                    <?php
-                    echo " " . $alias; ?>
-                </strong></a>
+            <strong>
+                <button href="" class="btn btn-light btn-sm" disabled="disabled">
+                    <strong>Usuario :</strong>
+                    <span class="user_back"> <?php echo " " . strtoupper($alias); ?> </span>
+                </button>
+            </strong>
         </div>
         <div class="p-2">
-            <a href="../Login/CerrarSesion.php" class="btn btn-outline-dark btn-sm">Cerrar sesion</a>
+            <a href="../Login/CerrarSesion.php" class="btn btn-dark btn-sm"><i class="fa-solid fa-right-to-bracket"></i></a>
         </div>
     </div>
     <div class="text-white text-center p-2" style="background-color: #3C4857;">

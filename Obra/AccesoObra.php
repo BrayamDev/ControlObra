@@ -20,40 +20,36 @@ $_SESSION['id_clientep'] = $idClienteP;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <!--CSS ESTILOS-->
-    <!-- <link rel="stylesheet" href="../Css/style.css"> -->
     <!--Boostrap5-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-
     <!--Iconosboostrap5-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!--CSS-->
+    <link rel="stylesheet" href="../Css/estilos.css">
     <title>Acceso a obra</title>
 </head>
 
 <body>
     <div class="d-flex botones p-1">
         <div class="me-auto p-2">
-            <a href="" class="btn btn-light btn-sm">Usuario:
-                <strong>
-                    <?php
-                    include "../Conexion.php";
-                    echo " " . $alias;
-                    ?>
-                </strong>
-            </a>
+            <strong>
+                <button href="" class="btn btn-light btn-sm" disabled="disabled">
+                    <strong>Usuario :</strong>
+                    <span class="user_back"> <?php echo " " . strtoupper($alias); ?> </span>
+                </button>
+            </strong>
         </div>
         <div class="p-2">
-            <a href="../Login/CerrarSesion.php" class="btn btn-outline-dark btn-sm">Cerrar sesion</a>
+            <a href="../Login/CerrarSesion.php" class="btn btn-dark btn-sm"><i class="fa-solid fa-right-to-bracket"></i></a>
         </div>
     </div>
-
     <div class="p-2 text-center text-white display-1 text-uppercase" style="background-color: #3C4857;">
         <h1>Control de obras</h1>
     </div>
 
-    <div class="container p-5">
+    <div class="container p-4">
         <div class="card text-center">
-            <div class="card-header">
+            <div class="card-header user_back">
                 <h2>Acceso a obra</h2>
             </div>
             <div class="container p-1 mb-1">
@@ -85,7 +81,7 @@ $_SESSION['id_clientep'] = $idClienteP;
                                         $resultado = mysqli_query($conexion, "SELECT * FROM obra WHERE id_clientep = $idClienteP");
                                         while ($consulta = mysqli_fetch_array($resultado)) {
                                         ?>
-                                            <option value="<?php echo $consulta['id_obra']?>">
+                                            <option value="<?php echo $consulta['id_obra'] ?>">
                                                 <?php echo ucfirst($consulta['nombre']); ?>
                                             </option>
                                         <?php
@@ -96,22 +92,34 @@ $_SESSION['id_clientep'] = $idClienteP;
                             </div>
                             <div class="col">
                                 <div class="campo-partidas">
-                                    <button href="../ControlObra/ControlObra.php" class="form-control btn btn-primary" name="accederObra" type="submit">Acceder a la obra</button>
+                                    <button href="../ControlObra/ControlObra.php" class="form-control btn btn-dark" name="accederObra" type="submit">
+                                        <i class="fa-solid fa-right-to-bracket"></i>
+                                        Acceder a la obra
+                                    </button>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="campo-partidas">
-                                    <a href="../Cliente/AgregarCliente.php" class="form-control btn btn-primary" type="submit">Agregar cliente</a>
+                                    <a href="../Cliente/AgregarCliente.php" class="form-control btn btn-dark" type="submit">
+                                        <i class="fa-solid fa-circle-plus"></i>
+                                        Agregar cliente
+                                    </a>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="campo-partidas">
-                                    <a href="../Obra/AgregarObra.php" class="form-control btn btn-primary" type="submit">Agregar obra</a>
+                                    <a href="../Obra/AgregarObra.php" class="form-control btn btn-dark" type="submit">
+                                        <i class="fa-solid fa-person-digging"></i>
+                                        Agregar obra
+                                    </a>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="campo-partidas">
-                                    <a href="../Obra/CreacionUsuarioObra.php" class="form-control btn btn-primary" type="submit">Agregar usuario</a>
+                                    <a href="../Obra/CreacionUsuarioObra.php" class="form-control btn btn-dark" type="submit">
+                                        <i class="fa-solid fa-user-plus"></i>
+                                        Agregar usuario
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -124,9 +132,3 @@ $_SESSION['id_clientep'] = $idClienteP;
 
 </html>
 
-<?php
-// }else {
-//     header("Location: ../index.php?error=No tiene autorizacion de acceso");
-//     exit();
-// }
-?>

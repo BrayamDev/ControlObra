@@ -29,47 +29,13 @@ while ($resultado = mysqli_fetch_array($consulta))
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!--cdn-->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
-    <!--Boostrap5-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <script language="javascript" src="js/jquery-3.1.1.min.js"></script>
-    <title>Contratos</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="shortcut icon" type="image/png" href="imagenes/favicon.png">
+    <!--script dropdownlist desplegable-->
     <script language="javascript" src="../js/jquery-3.1.1.min.js"></script>
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Contratos</title>
 </head>
 
 <body>
-    <div class="d-flex botones p-1">
-        <div class="me-auto p-2">
-            <a href="" class="btn btn-light btn-sm">Usuario:
-                <strong>
-                    <?php
-                echo " " . strtoupper($alias);
-                    ?>
-                </strong>
-            </a>
-            <a href="" class="btn btn-light btn-sm">Obra:
-
-                <strong>
-                    <?php
-                    echo " " . strtoupper($obra);
-                    ?>
-                </strong>
-            </a>
-        </div>
-
-        <div class="p-2">
-            <a href="../Login/CerrarSesion.php" class="btn btn-outline-dark btn-sm">Cerrar sesion</a>
-        </div>
-        <div class="p-2">
-            <a href="../ControlObra/ControlObra.php" class="btn btn-outline-dark btn-sm">Regresar presupuesto</a>
-        </div>
-        <div class="p-2">
-            <a href="" class="btn btn-outline-dark btn-sm">Regresar contrato</a>
-        </div>
-    </div>
-    <?php include "../Global/HeaderGlobal.php" ?>
+    <?php include("../Global/Header.php") ?>
     <div class="control__partida--links">
         <nav>
             <form action="../Contratos/ContratosBack.php" method="POST">
@@ -166,7 +132,7 @@ while ($resultado = mysqli_fetch_array($consulta))
                             <div class="col">
                                 <div class="input-group">
                                     <select class="form-control" name="id_contratista" id="id_contratista">
-                                        <option value="#" selected="true" disabled>--Seleccione el Contratista--</option>
+                                        <option value="#" selected="true" disabled>--Contratista--</option>
                                         <?php
                                         $resultado = mysqli_query($conexion, "SELECT * FROM contratista WHERE id_obra = $idObra");
                                         while ($consulta = mysqli_fetch_array($resultado)) {
@@ -206,6 +172,9 @@ while ($resultado = mysqli_fetch_array($consulta))
     <br>
     <div class="container">
         <table class="table text-center" id="idTabla">
+            <div class="text-center bg-dark p-2 rounded text-white">
+                <h2>Consulta contratos</h2>
+            </div>
             <thead class="table table-dark">
                 <tr>
                     <th class="table__head">Contratista</th>
@@ -217,8 +186,7 @@ while ($resultado = mysqli_fetch_array($consulta))
                     <th class="table__head">Anticipo Dolares</th>
                     <th class="table__head">F.G. Pesos</th>
                     <th class="table__head">F.G. Dolares</th>
-                    <th class="table__head">Editar</th>
-                    <th class="table__head">Eliminar</th>
+                    <th class="table__head">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -249,20 +217,17 @@ while ($resultado = mysqli_fetch_array($consulta))
 
                 ?>
                     <tr>
-                        <td class="table__data"><?php echo $contratista; ?></td>
-                        <td class="table__data"><?php echo $Concepto; ?></td>
-                        <td class="table__data"><?php echo $Subconcepto; ?></td>
-                        <td class="table__data"><?php echo $importePesos; ?></td>
-                        <td class="table__data"><?php echo $importeDolares; ?></td>
-                        <td class="table__data"><?php echo $anticipoPesos; ?></td>
-                        <td class="table__data"><?php echo $anticipoDolares; ?></td>
-                        <td class="table__data"><?php echo $fgPesos; ?></td>
-                        <td class="table__data"><?php echo $fgDolares; ?></td>
-                        <td class="table__data">
-
+                        <td><?php echo $contratista; ?></td>
+                        <td><?php echo $Concepto; ?></td>
+                        <td><?php echo $Subconcepto; ?></td>
+                        <td><?php echo $importePesos; ?></td>
+                        <td><?php echo $importeDolares; ?></td>
+                        <td><?php echo $anticipoPesos; ?></td>
+                        <td><?php echo $anticipoDolares; ?></td>
+                        <td><?php echo $fgPesos; ?></td>
+                        <td><?php echo $fgDolares; ?></td>
+                        <td>
                             <a href="" class="btn-sm btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
-                        </td>
-                        <td class="table__data">
                             <a href="" class="btn-sm btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
@@ -277,7 +242,14 @@ while ($resultado = mysqli_fetch_array($consulta))
     <script>
         $(document).ready(function() {
             $('#idTabla').DataTable({
-
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
+                },
+                pageLength: 5,
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    [5, 10, 20, 'Todos']
+                ]
             });
         })
     </script>

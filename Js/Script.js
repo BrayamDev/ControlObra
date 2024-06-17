@@ -41,7 +41,3 @@ const validateInputs = () => {
     setSuccess(claveUsuario);
   }
 };
-
-
-/*DATA TABLES */
-

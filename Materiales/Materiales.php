@@ -19,54 +19,20 @@ while ($resultado = mysqli_fetch_array($consulta))
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--fontawesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--Boostrap5-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <!--Iconosboostrap5-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!--cdn-->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
-    <script language="javascript" src="js/jquery-3.1.1.min.js"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Familias</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="shortcut icon" type="image/png" href="imagenes/favicon.png">
     <script language="javascript" src="../js/jquery-3.1.1.min.js"></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
 </head>
 
 <body>
-    <div class="d-flex botones p-1">
-        <div class="me-auto p-2">
-            <a href="" class="btn btn-light btn-sm">Usuario:
-                <strong>
-                    <?php
-                echo " " . strtoupper($alias);
-                    ?>
-                </strong>
-            </a>
-            <a href="" class="btn btn-light btn-sm">Obra:
-
-                <strong>
-                    <?php
-                    echo " " . strtoupper($obra);
-                    ?>
-                </strong>
-            </a>
-        </div>
-
-        <div class="p-2">
-            <a href="../Login/CerrarSesion.php" class="btn btn-outline-dark btn-sm">Cerrar sesion</a>
-        </div>
-        <div class="p-2">
-            <a href="../ControlObra/ControlObra.php" class="btn btn-outline-dark btn-sm">Regresar presupuesto</a>
-        </div>
-        <div class="p-2">
-            <a href="" class="btn btn-outline-dark btn-sm">Regresar contrato</a>
-        </div>
-    </div>
-    <?php include "../Global/HeaderGlobal.php" ?>
+    <?php include("../Global/Header.php") ?>
     <div class="control__partida--links">
         <nav>
             <form action="../Materiales/MaterialesBack.php" method="POST">
@@ -109,23 +75,23 @@ while ($resultado = mysqli_fetch_array($consulta))
                                 </div>
                                 <div class="col">
                                     <div class="campo-partidas">
-                                        <input class="form-control" type="text" placeholder="material" name="NombreMaterial">
+                                        <input class="form-control" type="text" placeholder="Material" name="NombreMaterial">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="campo-partidas">
-                                        <input class="form-control" type="text" placeholder="unidad" name="unidad">
+                                        <input class="form-control" type="text" placeholder="Unidad" name="unidad">
                                     </div>
                                 </div>
 
                                 <div class="col">
                                     <div class="campo-partidas">
-                                        <input class="form-control" type="text" placeholder="Escribe tu importe en pesos" name="importePesos">
+                                        <input class="form-control" type="text" placeholder="Importe en pesos" name="importePesos">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="campo-partidas">
-                                        <input class="form-control" type="text" placeholder="Escribe tu importe en dolares" name="importeDolares">
+                                        <input class="form-control" type="text" placeholder="Importe en dolares" name="importeDolares">
                                     </div>
                                 </div>
                                 <div class="col">
@@ -157,11 +123,11 @@ while ($resultado = mysqli_fetch_array($consulta))
             </div>
         </nav>
     </div>
-    <div class="text-center">
-        <h2> Lista de Materiales</h2>
-    </div>
     <div class="container">
         <table class="table table-striped" id="idTabla">
+            <div class="text-center bg-dark p-2 rounded text-white">
+                <h2>Lista de Materiales</h2>
+            </div>
             <thead class="table-dark">
                 <tr>
                     <th>Familial</th>
@@ -169,8 +135,7 @@ while ($resultado = mysqli_fetch_array($consulta))
                     <th>Unidad</th>
                     <th>Importe Pesos</th>
                     <th>Importe Dolares</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -194,26 +159,26 @@ while ($resultado = mysqli_fetch_array($consulta))
                         <td><?php echo $resultado1['importe_pesos']; ?></td>
                         <td><?php echo $resultado1['importe_dolares']; ?></td>
                         <td>
-                            <a href="" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a href="" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a href="" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                         </td>
-                        <td class="table__data">
-                            <a href="" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                        </td><?php    }  ?>
+                    <?php } ?>
                     </tr>
             </tbody>
         </table>
     </div>
-
-
-    <script src="../Js/jquery.js"></script>
-    <!--Jquery-->
-    <script src="../Js/jquery.js"></script>
-    <script src="../Js/Script.js"></script>
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#idTabla').DataTable({
-
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
+                },
+                pageLength: 5,
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    [5, 10, 20, 'Todos']
+                ]
             });
         })
     </script>

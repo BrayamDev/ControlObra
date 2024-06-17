@@ -33,6 +33,7 @@
                 <form action="Login/InicioSesionBack.php" method="POST" id="form">
                     <div class="mb-3">
                         <label class="form-label text-dark">
+                        <i class="fa-solid fa-user"></i>
                             Usuario
                         </label>
                         <input type="text" class="form-control" name="usuario" id="nombreUsuario">
@@ -40,12 +41,13 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label text-dark">
+                        <i class="fa-solid fa-lock"></i>
                             Contraseña
                         </label>
                         <input type="password" class="form-control" name="clave" id="claveUsuario">
                         <div class="error" id="error"></div>
                     </div>
-                    <button type="submit" class="btn btn-dark" name="btn">Ingresar</button>
+                    <button type="submit" class="btn btn-dark" name="btn"> Entrar <i class="fa-solid fa-right-to-bracket"></i></button>
                 </form>
             </div>
         </div>

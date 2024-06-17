@@ -11,49 +11,22 @@ $idObra = $_SESSION['id_obra'];
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!--fontawesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--Boostrap5-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <!--Iconosboostrap5-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!--cdn-->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
+    <script language="javascript" src="../js/jquery-3.1.1.min.js"></script>
     <title>Control de obra</title>
 </head>
 
 <body>
-    <div class="d-flex botones p-1">
-        <div class="me-auto p-2">
-            <a href="" class="btn btn-light btn-sm">Usuario:
-                <strong>
-                    <?php
-                    echo " " . strtoupper($alias);
-                    ?>
-                </strong>
-            </a>
-            <a href="" class="btn btn-light btn-sm">Obra:
-
-                <strong>
-                    <?php
-                    echo " " . strtoupper($obra);
-                    ?>
-                </strong>
-            </a>
-        </div>
-
-        <div class="p-2">
-            <a href="../Login/CerrarSesion.php" class="btn btn-outline-dark btn-sm">Cerrar sesion</a>
-        </div>
-        <div class="p-2">
-            <a href="" class="btn btn-outline-dark btn-sm">Regresar presupuesto</a>
-        </div>
-        <div class="p-2">
-            <a href="" class="btn btn-outline-dark btn-sm">Regresar contrato</a>
-        </div>
-    </div>
-
+    <?php include ("../Global/Header.php")?>
     <div class="p-3 text-center" style="background-color: #3C4857;">
         <a href="../Partidas/Partidas.php" class="btn btn-light">Partidas</a>
         <a href="../Contratos/Contratos.php" class="btn btn-light">Contratos</a>
@@ -73,8 +46,8 @@ $idObra = $_SESSION['id_obra'];
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <a href="../Presupuesto/ConsultaPresupuesto.php" class="btn btn-primary">Consultar</a>
-                        <a href="../Presupuesto/AplicarPresupuesto.php" class="btn btn-primary">Aplicar</a>
+                        <a href="../Presupuesto/AplicarPesos.php" class="btn btn-primary">Pesos</a>
+                        <a href="../Presupuesto/AplicarDolares.php" class="btn btn-primary">Dolares</a>
                     </div>
                 </div>
             </div>
@@ -82,7 +55,7 @@ $idObra = $_SESSION['id_obra'];
 
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Estimaciones Pesos
+            Estimaciones
         </button>
 
         <!-- Modal -->
@@ -94,10 +67,8 @@ $idObra = $_SESSION['id_obra'];
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <a href="../Estimaciones/ConsultaEstimaciones.php" class="btn btn-primary btn-sm">Consultar Pesos</a>
-                        <a href="../Estimaciones/ConsultaEstimaciones.php" class="btn btn-primary btn-sm">Consultar Dolares</a>
-                        <a href="../Estimaciones/AplicarEstimaciones.php" class="btn btn-primary btn-sm" class="btn btn-primary">Aplicar Pesos</a>
-                        <a href="../Estimaciones/AplicarEstimacionesdolares.php" class="btn btn-primary btn-sm" class="btn btn-primary">Aplicar Dolares</a>
+                        <a href="../Estimaciones/AplicarEstimaciones.php" class="btn btn-primary" class="btn btn-primary">Aplicar Pesos</a>
+                        <a href="../Estimaciones/AplicarEstimacionesdolares.php" class="btn btn-primary" class="btn btn-primary">Aplicar Dolares</a>
                     </div>
 
                 </div>
@@ -114,7 +85,7 @@ $idObra = $_SESSION['id_obra'];
     </div>
     <div class="container">
     <table class="table table-striped text-center" id="idTabla">
-        <thead class="table table-dark">
+        <thead class="table table-dark ">
             <tr>
                 <th>Concepto</th>
                 <th>Importe Original</th>
@@ -270,7 +241,14 @@ $idObra = $_SESSION['id_obra'];
     <script>
         $(document).ready(function() {
             $('#idTabla').DataTable({
-
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
+                },
+                pageLength: 5,
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    [5, 10, 20, 'Todos']
+                ]
             });
         })
     </script>

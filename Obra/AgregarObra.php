@@ -102,16 +102,6 @@ include "../Conexion.php";
                     </div>
                 </form>
             </div>
-            <!-- <div class="card-footer text-body-secondary">
-                <div class="col">
-                    <div class="campo-partidas">
-                        <a class="form-control btn btn-primary" type="submit">
-                            <i class="fa-solid fa-plus"></i>
-                            Agregar obra
-                        </a>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 

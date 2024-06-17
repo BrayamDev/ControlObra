@@ -27,44 +27,14 @@ while ($resultado = mysqli_fetch_array($consulta))
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!--cdn-->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
-    <script language="javascript" src="js/jquery-3.1.1.min.js"></script>
-    <title>Contratos</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="shortcut icon" type="image/png" href="imagenes/favicon.png">
+    <title>Aplicar estimacion pesos</title>
     <script language="javascript" src="../js/jquery-3.1.1.min.js"></script>
 
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
 </head>
 
 <body>
-    <div class="d-flex botones p-1">
-        <div class="me-auto p-2">
-            <a href="" class="btn btn-light btn-sm">Usuario:
-                <strong>
-                    <?php
-                echo " " . strtoupper($alias);
-                    ?>
-                </strong>
-            </a>
-            <a href="" class="btn btn-light btn-sm">Obra:
-                <strong>
-                    <?php
-                    echo " " . strtoupper($obra);
-                    ?>
-                </strong>
-            </a>
-        </div>
-        <div class="p-2">
-            <a href="../Login/CerrarSesion.php" class="btn btn-outline-dark btn-sm">Cerrar sesion</a>
-        </div>
-        <div class="p-2">
-            <a href="../ControlObra/ControlObra.php" class="btn btn-outline-dark btn-sm">Regresar presupuesto</a>
-        </div>
-        <div class="p-2">
-            <a href="" class="btn btn-outline-dark btn-sm">Regresar contrato</a>
-        </div>
-    </div>
-    <?php include "../Global/HeaderGlobal.php" ?>
+    <?php include("../Global/Header.php") ?>
     <div class="control__partida--links">
         <nav>
             <form action="../Estimaciones/EstimacionPesosBack.php" method="POST">
@@ -251,10 +221,10 @@ while ($resultado = mysqli_fetch_array($consulta))
                         <td class="table__data"><?php echo number_format($importePagado); ?></td>
                         <td class="table__data">
 
-                            <a href="EditarEstimacionPesos.php?id=<?php echo $consulta5['id_estimacion']?>" class="btn-sm btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a href="EditarEstimacionPesos.php?id=<?php echo $consulta5['id_estimacion'] ?>" class="btn-sm btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
                         </td>
                         <td class="table__data">
-                            <a href="EliminarEstimacionPesos.php?id=<?php echo $consulta5['id_estimacion']?>" class="btn-sm btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            <a href="EliminarEstimacionPesos.php?id=<?php echo $consulta5['id_estimacion'] ?>" class="btn-sm btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -262,14 +232,18 @@ while ($resultado = mysqli_fetch_array($consulta))
         </table>
     </div>
 <?php } ?>
-<!--Jquery-->
-<script src="../Js/jquery.js"></script>
-<script src="../Js/Script.js"></script>
 <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#idTabla').DataTable({
-
+            language: {
+                url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
+            },
+            pageLength: 5,
+            lengthMenu: [
+                [5, 10, 20, -1],
+                [5, 10, 20, 'Todos']
+            ]
         });
     })
 </script>

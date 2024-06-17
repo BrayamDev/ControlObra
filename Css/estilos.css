@@ -1,0 +1,23 @@
+/**FONT AWESOME**/
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --colorPrimario: #0F5375;
+    --colorSecundario: #3C4857;
+    --colorTerceario: #1D9AD6;
+    --colorOscuro: #262626;
+    --colorBlanco: #ffff;
+}
+
+.user_back{
+    background-color: #0F5375;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+    align-items: center;
+}
+.user_content{
+    font-weight: 400;
+}

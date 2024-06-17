@@ -25,32 +25,8 @@ $idObra = $_SESSION['id_obra'];
 </head>
 
 <body>
-    <div class="d-flex botones p-1">
-        <div class="me-auto p-2">
-            <a href="" class="btn btn-light btn-sm">Usuario:
-                <strong>
-                    <?php
-                    echo " " . strtoupper($alias);
-                    ?>
-                </strong>
-            </a>
-            <a href="" class="btn btn-light btn-sm">Obra:
-
-                <strong>
-                    <?php
-                    echo " " . strtoupper($obra);
-                    ?>
-                </strong>
-            </a>
-        </div>
-
-        <div class="p-2">
-            <a href="../Login/CerrarSesion.php" class="btn btn-outline-dark btn-sm">Cerrar sesion</a>
-            <a href="../ControlObra/ControlObra.php" class="btn btn-outline-dark btn-sm">Presupuesto</a>
-        </div>
-    </div>
-    <?php include "../Global/HeaderGlobal.php" ?>
-    <div class="control__partida--links">
+    <?php include("../Global/Header.php") ?>
+    <div>
         <nav>
             <div class="text-white p-3" style="background-color: #3C4857;">
                 <div class="container">
@@ -112,16 +88,18 @@ $idObra = $_SESSION['id_obra'];
     </div>
     <br>
     <div class="contenedor__tabla container">
-        <table class="table table-striped text-center" id="idContratista">
+        <table class="table table-striped text-center" id="idTabla">
             <thead class="table table-dark">
+                <div class="text-center bg-dark p-2 rounded text-white">
+                    <h2>Consulta Contratistas</h2>
+                </div>
                 <tr>
                     <th class="">Alias Contratista</th>
                     <th class="">Nombres</th>
                     <th class="">Apellidos</th>
                     <th class="">Telefono</th>
                     <th class="">Correo electronico</th>
-                    <th class="">Editar</th>
-                    <th class="">Eliminar</th>
+                    <th class="">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -138,10 +116,8 @@ $idObra = $_SESSION['id_obra'];
                         <td class=""><?php echo $Fila['telefono'] ?></td>
                         <td class=""><?php echo $Fila['mail'] ?></td>
                         <td class="">
-                            <a href="EditarContratistaFront.php?id_contratista=<?php echo $Fila['id_contratista'] ?>" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
-                        </td>
-                        <td class="table__data">
-                            <a href="EliminarContratista.php?id_contratista=<?php echo $Fila['id_contratista'] ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            <a href="EditarContratistaFront.php?id_contratista=<?php echo $Fila['id_contratista'] ?>" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a href="EliminarContratista.php?id_contratista=<?php echo $Fila['id_contratista'] ?>" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 <?php
@@ -157,8 +133,15 @@ $idObra = $_SESSION['id_obra'];
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#idContratista').DataTable({
-
+            $('#idTabla').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
+                },
+                pageLength: 5,
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    [5, 10, 20, 'Todos']
+                ]
             });
         })
     </script>
