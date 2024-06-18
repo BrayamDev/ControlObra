@@ -36,7 +36,7 @@ while ($resultado = mysqli_fetch_array($consulta))
 
 <body>
     <?php include("../Global/Header.php") ?>
-    <div class="control__partida--links">
+    <div>
         <nav>
             <form action="../Contratos/ContratosBack.php" method="POST">
                 <div class="text-white" style="background-color: #3C4857;">

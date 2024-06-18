@@ -80,8 +80,8 @@ $idObra = $_SESSION['id_obra'];
         <a href="" class="btn btn-light">Generar Presupuesto</a>
     </div>
     <div class="control__obra--botones p-3 text-center" style="cursor: pointer;">
-        <i class="bi bi-file-earmark-pdf-fill btn btn-danger btn-sm">Imprimir Pdf</i>
-        <i class="bi bi-file-earmark-spreadsheet-fill btn btn-success btn-sm">Imprimir excel</i>
+        <i class="bi bi-file-earmark-pdf-fill btn btn-danger btn-sm"></i>
+        <i class="bi bi-file-earmark-spreadsheet-fill btn btn-success btn-sm"></i>
     </div>
     <div class="container">
     <table class="table table-striped text-center" id="idTabla">
@@ -233,10 +233,6 @@ $idObra = $_SESSION['id_obra'];
         </tbody>
     </table>
     </div>
-
-    <!--Jquery-->
-    <script src="../Js/jquery.js"></script>
-    <script src="../Js/Script.js"></script>
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
