@@ -38,7 +38,7 @@ $idObra = $_SESSION['id_obra'];
             <a href="../Login/CerrarSesion.php" class="btn btn-dark btn-sm"><i class="fa-solid fa-right-to-bracket"></i></a>
         </div>
         <div class="p-2">
-            <a href="" class="btn btn-dark btn-sm">Regresar presupuesto</a>
+            <a href="../ControlObra/ControlObra.php" class="btn btn-dark btn-sm">Regresar presupuesto</a>
         </div>
         <div class="p-2">
             <a href="" class="btn btn-dark btn-sm">Regresar contrato</a>

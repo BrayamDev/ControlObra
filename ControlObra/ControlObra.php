@@ -76,7 +76,7 @@ $idObra = $_SESSION['id_obra'];
         </div>
         <a href="../Actividades/Actividades.php" class=" btn btn-light">Actividades</a>
         <a href="../Facturas/Facturas.php" class="btn btn-light">Facturas</a>
-        <a href="../Obra/ObraCliente.php" class="btn btn-light">Cambio obra</a>
+        <a href="../CambioObra/CambioObra.php" class="btn btn-light">Cambio obra</a>
         <a href="" class="btn btn-light">Generar Presupuesto</a>
     </div>
     <div class="control__obra--botones p-3 text-center" style="cursor: pointer;">
