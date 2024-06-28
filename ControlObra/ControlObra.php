@@ -5,6 +5,8 @@ include "../Conexion.php";
 $alias = $_SESSION['alias'];
 $obra = $_SESSION['nombreObra'];
 $idObra = $_SESSION['id_obra'];
+$_SESSION['contrato'] = "";
+$_SESSION['pagina'] = 0;
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +34,8 @@ $idObra = $_SESSION['id_obra'];
         <a href="../Contratos/Contratos.php" class="btn btn-light">Contratos</a>
         <a href="../Contratistas/Contratistas.php" class="btn btn-light">Contratista</a>
         <a href="../Materiales/Materiales.php" class="btn btn-light">Materiales</a>
+        <a href="../MO/Cuadrillas.php" class="btn btn-light">Cuadrillas</a>
+        <a href="../PU/pu.php" class="btn btn-light">Precios Unitarios</a>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal1">
             Presupuesto
@@ -76,8 +80,8 @@ $idObra = $_SESSION['id_obra'];
         </div>
         <a href="../Actividades/Actividades.php" class=" btn btn-light">Actividades</a>
         <a href="../Facturas/Facturas.php" class="btn btn-light">Facturas</a>
-        <a href="../CambioObra/CambioObra.php" class="btn btn-light">Cambio obra</a>
-        <a href="" class="btn btn-light">Generar Presupuesto</a>
+        <a href="../Cambio/CambioObra.php" class="btn btn-light">Cambio obra</a>
+        <a href="../PresupuestoPU/GenerarPresupuesto.php" class="btn btn-light">Generar Presupuesto</a>
     </div>
     <div class="control__obra--botones p-3 text-center" style="cursor: pointer;">
         <i class="bi bi-file-earmark-pdf-fill btn btn-danger btn-sm"></i>
@@ -85,7 +89,7 @@ $idObra = $_SESSION['id_obra'];
     </div>
     <div class="container">
     <table class="table table-striped text-center" id="idTabla">
-        <thead class="table table-dark ">
+        <thead class="table table-dark">
             <tr>
                 <th>Concepto</th>
                 <th>Importe Original</th>
@@ -115,6 +119,7 @@ $idObra = $_SESSION['id_obra'];
             $importepagadopesosydolarestotal = 0;
             $sumafgpesosydolarestotal = 0;
             $importeporEstimartotal = 0;
+            $importepagadopesosydolares = 0;
 
             $resultadotipocambio = mysqli_query($conexion, "SELECT * FROM obra WHERE  id_obra = '$idObra'");
             $consulta7 = mysqli_fetch_array($resultadotipocambio);
@@ -205,13 +210,13 @@ $idObra = $_SESSION['id_obra'];
 
                 <tr>
                     <td class="table__data"><?php echo $consulta['concepto']; ?></td>
-                    <td class="table__data"><?php echo $sumapresupuestototal; ?></td>
-                    <td class="table__data"><?php echo $sumacontratosconceptototal; ?></td>
-                    <td class="table__data"><?php echo $diferencia; ?></td>
-                    <td class="table__data"><?php echo $sumaEstimacionespd; ?></td>
-                    <td class="table__data"><?php echo $importeporEstimar; ?></td>
-                    <td class="table__data"><?php echo $importepagadopesosydolares; ?></td>
-                    <td class="table__data"><?php echo $sumafgpesosydolares; ?></td>
+                    <td class="table__data"><?php echo number_format($sumapresupuestototal); ?></td>
+                    <td class="table__data"><?php echo number_format($sumacontratosconceptototal); ?></td>
+                    <td class="table__data"><?php echo number_format($diferencia); ?></td>
+                    <td class="table__data"><?php echo number_format($sumaEstimacionespd); ?></td>
+                    <td class="table__data"><?php echo number_format($importeporEstimar); ?></td>
+                    <td class="table__data"><?php echo number_format($importepagadopesosydolares); ?></td>
+                    <td class="table__data"><?php echo number_format($sumafgpesosydolares); ?></td>
                 </tr> <?php $sumaEstimacionDolares = 0;
                         $sumaEstimacionPesos = 0;
                         $importeDolaresContrato = 0;
@@ -222,17 +227,18 @@ $idObra = $_SESSION['id_obra'];
                     } ?>
             <tr>
                 <td class=" table__data">SUMA</td>
-                <td class="table__data"><?php echo $sumapresupuestototaltotal; ?></td>
-                <td class="table__data"><?php echo $sumacontratosconceptototaltotal; ?></td>
-                <td class="table__data"><?php echo $diferenciatotal; ?></td>
-                <td class="table__data"><?php echo $sumaEstimacionespdtotal; ?></td>
-                <td class="table__data"><?php echo $importeporEstimartotal; ?></td>
-                <td class="table__data"><?php echo $importepagadopesosydolarestotal; ?></td>
-                <td class="table__data"><?php echo $sumafgpesosydolarestotal; ?></td>
+                <td class="table__data"><?php echo number_format($sumapresupuestototaltotal); ?></td>
+                <td class="table__data"><?php echo number_format($sumacontratosconceptototaltotal); ?></td>
+                <td class="table__data"><?php echo number_format($diferenciatotal); ?></td>
+                <td class="table__data"><?php echo number_format($sumaEstimacionespdtotal); ?></td>
+                <td class="table__data"><?php echo number_format($importeporEstimartotal); ?></td>
+                <td class="table__data"><?php echo number_format($importepagadopesosydolarestotal); ?></td>
+                <td class="table__data"><?php echo number_format($sumafgpesosydolarestotal); ?></td>
             </tr>
         </tbody>
     </table>
     </div>
+
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
     <script>
         $(document).ready(function() {

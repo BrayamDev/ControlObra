@@ -88,18 +88,16 @@ $idObra = $_SESSION['id_obra'];
     </div>
     <br>
     <div class="contenedor__tabla container">
-        <table class="table table-striped text-center" id="idTabla">
+        <table class="table table-striped text-center" id="idContratista">
             <thead class="table table-dark">
-                <div class="text-center bg-dark p-2 rounded text-white">
-                    <h2>Consulta Contratistas</h2>
-                </div>
                 <tr>
                     <th class="">Alias Contratista</th>
                     <th class="">Nombres</th>
                     <th class="">Apellidos</th>
                     <th class="">Telefono</th>
                     <th class="">Correo electronico</th>
-                    <th class="">Acciones</th>
+                    <th class="">Editar</th>
+                    <th class="">Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -116,8 +114,10 @@ $idObra = $_SESSION['id_obra'];
                         <td class=""><?php echo $Fila['telefono'] ?></td>
                         <td class=""><?php echo $Fila['mail'] ?></td>
                         <td class="">
-                            <a href="EditarContratistaFront.php?id_contratista=<?php echo $Fila['id_contratista'] ?>" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
-                            <a href="EliminarContratista.php?id_contratista=<?php echo $Fila['id_contratista'] ?>" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                            <a href="EditarContratistaFront.php?id_contratista=<?php echo $Fila['id_contratista'] ?>" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+                        </td>
+                        <td class="table__data">
+                            <a href="EliminarContratista.php?id_contratista=<?php echo $Fila['id_contratista'] ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 <?php

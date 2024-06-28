@@ -1,5 +1,6 @@
 <?php
 
+
 include "../Conexion.php";
 
 $alias = $_SESSION['alias'];
@@ -41,7 +42,7 @@ $idObra = $_SESSION['id_obra'];
             <a href="../ControlObra/ControlObra.php" class="btn btn-dark btn-sm">Regresar presupuesto</a>
         </div>
         <div class="p-2">
-            <a href="" class="btn btn-dark btn-sm">Regresar contrato</a>
+            <a href="../Contratos/Contratos.php" class="btn btn-dark btn-sm">Regresar contrato</a>
         </div>
     </div>
     <div class="text-white text-center p-2" style="background-color: #3C4857;">

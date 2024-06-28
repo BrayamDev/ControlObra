@@ -26,6 +26,7 @@ while ($resultado = mysqli_fetch_array($consulta))
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!--cdn-->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Partidas</title>
     <script language="javascript" src="../js/jquery-3.1.1.min.js"></script>
@@ -141,12 +142,11 @@ while ($resultado = mysqli_fetch_array($consulta))
             </div>
         </nav>
     </div>
-
+    <div class="text-center">
+        <h2>Consulta partidas</h2>
+    </div>
     <div class="container">
         <table class="table table-striped" id="idTabla">
-            <div class="text-center bg-dark p-2 rounded text-white">
-                <h2>Consulta partidas</h2>
-            </div>
             <thead class="table-dark">
                 <tr>
                     <th>Numero</th>
@@ -154,7 +154,8 @@ while ($resultado = mysqli_fetch_array($consulta))
                     <th>SubConcepto</th>
                     <th>Importe Pesos</th>
                     <th>Importe Dolares</th>
-                    <th>Acciones</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -167,17 +168,22 @@ while ($resultado = mysqli_fetch_array($consulta))
                         $idSubconcepto = $resultado1['id_subconcepto'];
                         $consulta2 = mysqli_query($conexion, "select * from  presupuesto WHERE id_concepto = $idConcepto and id_subconcepto = $idSubconcepto and id_obra = $idObra");
                         while ($resultado2 = mysqli_fetch_array($consulta2)) {
+                            $consulta3 = mysqli_query($conexion, "select * FROM  presupuesto WHERE id_obra = $idObra AND id_concepto = '$idConcepto' AND id_subconcepto = '$idSubconcepto' ");
+                            $resultado3 = mysqli_fetch_array($consulta3);
+                            $id_presupuesto = $resultado3['id_presupuesto'];
 
                 ?>
                             <tr>
                                 <td><?php echo $resultado['id_concepto']; ?></td>
                                 <td><?php echo $resultado['concepto']; ?></td>
                                 <td><?php echo $resultado1['subconcepto']; ?></td>
-                                <td><?php echo $resultado2['importe_pesos']; ?></td>
-                                <td><?php echo $resultado2['importe_dolares']; ?></td>
+                                <td><?php echo number_format($resultado2['importe_pesos']); ?></td>
+                                <td><?php echo number_format($resultado2['importe_dolares']); ?></td>
                                 <td>
-                                    <a href="" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
-                                    <a href="" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                                    <a href="" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+                                </td>
+                                <td class="table__data">
+                                <a href="EliminarPartida.php?id_presupuesto=<?php echo $resultado3['id_presupuesto'] ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                 </td><?php    }
                                 }
                             } ?>

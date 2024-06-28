@@ -22,13 +22,34 @@ $idObra = $_SESSION['id_obra'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <!--cdn-->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
-    <!--script-->
-    <script language="javascript" src="../js/jquery-3.1.1.min.js"></script>
     <title>Actividades</title>
 </head>
 
 <body>
-    <?php include("../Global/Header.php") ?>
+    <div class="d-flex botones p-1">
+        <div class="me-auto p-2">
+            <a href="" class="btn btn-light btn-sm">Usuario:
+                <strong>
+                    <?php
+                    echo " " . strtoupper($alias);
+                    ?>
+                </strong>
+            </a>
+            <a href="" class="btn btn-light btn-sm">Obra:
+
+                <strong>
+                    <?php
+                    echo " " . strtoupper($obra);
+                    ?>
+                </strong>
+            </a>
+        </div>
+        <div class="p-2">
+            <a href="../Login/CerrarSesion.php" class="btn btn-outline-dark btn-sm">Cerrar sesion</a>
+            <a href="../ControlObra/ControlObra.php" class="btn btn-outline-dark btn-sm">Presupuesto</a>
+        </div>
+    </div>
+    <?php include "../Global/HeaderGlobal.php" ?>
     <div class="control__partida--links">
         <nav>
             <div class="text-white p-2" style="background-color: #3C4857;">
@@ -87,11 +108,11 @@ $idObra = $_SESSION['id_obra'];
         </nav>
     </div>
     <div class="control__obra--botones p-3 text-center" style="cursor: pointer;">
-        <a href="../FPDF/PruebaH.php" target="_blank"><i class="bi bi-file-earmark-pdf-fill btn btn-danger btn-sm">Imprimir no terminadas</i></a>
-        <a href="../FPDF/PruebaV.php" target="_blank"><i class="bi bi-file-earmark-pdf-fill btn btn-danger btn-sm">Imprimir Todas las actividades </i></a>
+       <a href="../FPDF/PruebaH.php" target="_blank"><i class="bi bi-file-earmark-pdf-fill btn btn-danger btn-sm">Imprimir no terminadas</i></a>
+       <a href="../FPDF/PruebaV.php" target="_blank"><i class="bi bi-file-earmark-pdf-fill btn btn-danger btn-sm">Imprimir Todas las actividades </i></a>
     </div>
     <div class="contenedor__tabla container">
-        <table class="table table-striped text-cente" id="idTabla">
+        <table class="table table-striped text-cente" id="idActividad">
             <thead class="table table-dark">
                 <tr>
                     <th>Actividad</th>
@@ -110,15 +131,15 @@ $idObra = $_SESSION['id_obra'];
                 while ($Fila = $resultadoContratista->fetch_assoc()) {
                 ?>
                     <tr>
-                        <td><?php echo $Fila['actividad'] ?></td>
-                        <td><?php echo $Fila['fechaInicial'] ?></td>
-                        <td><?php echo $Fila['fechaFinal'] ?></td>
-                        <td><?php echo $Fila['responsableActividad'] ?></td>
-                        <td>
-                            <a class="btn-sm btn btn-dark" href="Terminado.php?id_actividad=<?php echo $Fila['id_actividad'] ?>">Terminado</a>
+                        <td class=""><?php echo $Fila['actividad'] ?></td>
+                        <td class=""><?php echo $Fila['fechaInicial'] ?></td>
+                        <td class=""><?php echo $Fila['fechaFinal'] ?></td>
+                        <td class=""><?php echo $Fila['responsableActividad'] ?></td>
+                        <td class="">
+                            <a class="btn btn-dark" href="Terminado.php?id_actividad=<?php echo $Fila['id_actividad']?>">Terminado</a>
                         </td>
-                        <td>
-                            <a href="EditarActividadFront.php?id_actividad=<?php echo $Fila['id_actividad'] ?>" class="btn-sm btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
+                        <td class="">
+                            <a href="EditarActividadFront.php?id_actividad=<?php echo $Fila['id_actividad'] ?>" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
                         </td>
                     </tr>
                 <?php
@@ -128,18 +149,13 @@ $idObra = $_SESSION['id_obra'];
         </table>
     </div>
     <!--Jquery-->
+    <script src="../Js/jquery.js"></script>
+    <script src="../Js/Script.js"></script>
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#idTabla').DataTable({
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
-                },
-                pageLength: 5,
-                lengthMenu: [
-                    [5, 10, 20, -1],
-                    [5, 10, 20, 'Todos']
-                ]
+            $('#idActividad').DataTable({
+
             });
         })
     </script>

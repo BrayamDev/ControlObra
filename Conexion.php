@@ -58,3 +58,4 @@ if (!$conexion) {
      echo "Conexion Fallida";
 }
 
+$conexion->set_charset("utf8");

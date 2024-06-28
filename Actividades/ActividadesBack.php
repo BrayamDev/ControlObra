@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $actividad = $_POST["actividad"];
         $fechaInicial = $_POST["fechaInicial"];
         $fechaFinal = $_POST["fechaFinal"];
-        $responsableActividad = $_POST["responsableActividad"];  
+        $responsableActividad = $_POST["responsableActividad"];
 
         $insertar = "INSERT INTO actividad (actividad,fechaInicial,fechaFinal,responsableActividad, id_obra, fechaRegistro) VALUES('$actividad','$fechaInicial','$fechaFinal','$responsableActividad', '$idObra', NOW())";
         $ejecutar = mysqli_query($conexion, $insertar);

@@ -6,6 +6,7 @@ include "../Conexion.php";
 $alias = $_SESSION['alias'];
 $obra = $_SESSION['nombreObra'];
 $idObra = $_SESSION['id_obra'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,84 +15,127 @@ $idObra = $_SESSION['id_obra'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <!--Iconosboostrap5-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!--Boostrap5-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <!--Iconosboostrap5-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!--cdn-->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
-    <!--script dropdownlist desplegable-->
-    <script language="javascript" src="../js/jquery-3.1.1.min.js"></script>
-    <title>Facturas</title>
+    <title>Contratistas</title>
 </head>
 
 <body>
-    <?php include("../Global/Header.php") ?>
-    <div>
-        <nav>
-            <div class="text-white" style="background-color: #3C4857">
-                <div class="container p-3">
-                    <div class="row">
-                        <div class="col">
-                            <div class="partidas--dropdown">
-                                <select class="form-control">
-                                    <option value="#" selected="true">Seleccione el contratista</option>
-                                    <option value="#">contratista numero 1</option>
-                                    <option value="#">contratista numero 2</option>
-                                    <option value="#">contratista numero 3</option>
-                                    <option value="#">contratista numero 4</option>
-                                    <option value="#">contratista numero 5</option>
-                                    <option value="#">contratista numero 6</option>
-                                    <option value="#">contratista numero 7</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="partidas--dropdown">
-                                <select class="form-control">
-                                    <option value="#" selected="true">Seleccione el el contrato</option>
-                                    <option value="#">contrato numero 1</option>
-                                    <option value="#">contrato numero 2</option>
-                                    <option value="#">contrato numero 3</option>
-                                    <option value="#">contrato numero 4</option>
-                                    <option value="#">contrato numero 5</option>
-                                    <option value="#">contrato numero 6</option>
-                                    <option value="#">contrato numero 7</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+    <div class="d-flex botones p-1">
+        <div class="me-auto p-2">
+            <a href="" class="btn btn-light btn-sm">Usuario:
+                <strong>
+                    <?php
+                    echo " " . strtoupper($alias);
+                    ?>
+                </strong>
+            </a>
+            <a href="" class="btn btn-light btn-sm">Obra:
+
+                <strong>
+                    <?php
+                    echo " " . strtoupper($obra);
+                    ?>
+                </strong>
+            </a>
+        </div>
+
+        <div class="p-2">
+            <a href="../Login/CerrarSesion.php" class="btn btn-outline-dark btn-sm">Cerrar sesion</a>
+            <a href="../ControlObra/ControlObra.php" class="btn btn-outline-dark btn-sm">Presupuesto</a>
+        </div>
     </div>
-    <div class="container p-2">
-        <table class="table text-center" id="idTabla">
-            <div class="text-center bg-dark p-2 rounded text-white">
-                <h2>Lista de facturas</h2>
-            </div>
+    <?php include "../Global/HeaderGlobal.php" ?>
+    
+    <br>
+    <div class="contenedor__tabla container">
+        <table class="table table-striped text-center" id="idContratista">
             <thead class="table table-dark">
                 <tr>
-                    <th class="table__head">Contrato</th>
-                    <th class="table__head">Contratista</th>
-                    <th class="table__head">Nº de Factura</th>
-                    <th class="table__head">Importe pesos</th>
-                    <th class="table__head">Nº Factura</th>
-                    <th class="table__head">Importe Dolares</th>
+                    <th class="">Contratista</th>
+                    <th class="">Partida</th>
+                    <th class="">Subpartida</th>
+                    <th class="">Factura Pesos</th>
+                    <th class="">Importe Pesos</th>
+                    <th class="">Factura Dólares</th>
+                    <th class="">Importe Dólares</th>
+                    
+
                 </tr>
             </thead>
-
             <tbody>
-                <tr>
-                    <td class="table__data">Proyecto</td>
-                    <td class="table__data">Dato en bases de datos</td>
-                    <td class="table__data">Dato en bases de datos</td>
-                    <td class="table__data">Dato en bases de datos</td>
-                    <td class="table__data">Dato en bases de datos</td>
-                    <td class="table__data">Dato en bases de datos</td>
-                </tr>
+                <?php
+                $sqlContrato = "SELECT * FROM contrato WHERE id_obra = '$idObra'";
+                $resultadoContrato = $conexion->query($sqlContrato);
+
+                while ($Fila = $resultadoContrato->fetch_assoc()) {
+                    $idContratista = $Fila['id_contratista'];
+                    $idPartida = $Fila['id_concepto'];
+                    $idSubpartida = $Fila['id_subconcepto'];
+
+                    $resultadoPartida = mysqli_query($conexion, "SELECT * FROM concepto WHERE id_obra = '$idObra' and id_concepto = $idPartida");
+                    $consulta = mysqli_fetch_array($resultadoPartida);
+                    $Partida = $consulta['concepto'];
+
+                    $resultadoPartida = mysqli_query($conexion, "SELECT * FROM subconcepto WHERE id_obra = '$idObra' and id_subconcepto = $idSubpartida");
+                    $consulta = mysqli_fetch_array($resultadoPartida);
+                    $Subpartida = $consulta['subconcepto'];
+
+                    $resultadoContratista = mysqli_query($conexion, "SELECT * FROM contratista WHERE id_obra = '$idObra' and id_contratista = $idContratista");
+                    $consulta = mysqli_fetch_array($resultadoContratista);
+                ?>
+                    <tr>
+                        <td class=""><?php echo $consulta['aliascontratista'] ?></td>
+                        <td class=""><?php echo $Partida ?></td>
+                        <td class=""><?php echo $Subpartida ?></td>
+                        <td class=""><?php echo $Fila['fact_pesos'] ?></td>
+                        <td class=""><?php echo $Fila['anticipo_pesos'] ?></td>
+                        <td class=""><?php echo $Fila['factt_dolares'] ?></td>
+                        <td class=""><?php echo $Fila['anticipo_dolares'] ?></td>
+                    </tr>
+                <?php
+                }
+                $sqlestimacion = "SELECT * FROM estimacion WHERE id_obra = '$idObra'";
+                $resultadoestimacion = $conexion->query($sqlestimacion);
+
+                while ($Fila = $resultadoestimacion->fetch_assoc()) {
+                    $idContrato = $Fila['id_contrato'];
+
+                    $resultadoContrato = mysqli_query($conexion, "SELECT * FROM contrato WHERE id_obra = '$idObra' and id_contrato = $idContrato");
+                    $consulta = mysqli_fetch_array($resultadoContrato);
+                    $idContratista = $consulta['id_contratista'];
+
+                    $resultadoContratista = mysqli_query($conexion, "SELECT * FROM contratista WHERE id_obra = '$idObra' and id_contratista = '$idContratista'");
+                    $consulta1 = mysqli_fetch_array($resultadoContratista);
+
+                    $resultadoPartida = mysqli_query($conexion, "SELECT * FROM concepto WHERE id_obra = '$idObra' and id_concepto = $idPartida");
+                    $consulta = mysqli_fetch_array($resultadoPartida);
+                    $Partida = $consulta['concepto'];
+
+                    $resultadoPartida = mysqli_query($conexion, "SELECT * FROM subconcepto WHERE id_obra = '$idObra' and id_subconcepto = $idSubpartida");
+                    $consulta = mysqli_fetch_array($resultadoPartida);
+                    $Subpartida = $consulta['subconcepto'];
+
+                    $importePesos = $Fila['importe_pesos'] - $Fila['amort_pesos'] - $Fila['fg_pesos'];
+                    $importeDolares = $Fila['importe_dolares'] - $Fila['amort_dolares'] - $Fila['fg_dolares'];
+                   
+                ?>
+                    <tr>
+                        <td class=""><?php echo $consulta1['aliascontratista'] ?></td>
+                        <td class=""><?php echo $Partida ?></td>
+                        <td class=""><?php echo $Subpartida ?></td>
+                        <td class=""><?php echo $Fila['factura_pesos'] ?></td>
+                        <td class=""><?php echo $importePesos ?></td>
+                        <td class=""><?php echo $Fila['factura_dolares'] ?></td>
+                        <td class=""><?php echo $importeDolares ?></td>
+                    </tr>
+                <?php
+                }
+                ?>
             </tbody>
         </table>
     </div>
@@ -102,21 +146,15 @@ $idObra = $_SESSION['id_obra'];
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#idTabla').DataTable({
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
-                },
-                pageLength: 5,
-                lengthMenu: [
-                    [5, 10, 20, -1],
-                    [5, 10, 20, 'Todos']
-                ]
+            $('#idContratista').DataTable({
+
             });
         })
     </script>
     <!--boostrap5-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

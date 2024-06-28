@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $resultadoFamilia = mysqli_query($conexion, "SELECT * FROM familia WHERE familia = '$nuevaFamilia' AND id_obra = '$idObra'");
         $consulta = mysqli_fetch_array($resultadoFamilia);
         $nuevaFamiliaRepetida = $consulta['familia'];
+
         if($nuevaFamilia !== $nuevaFamiliaRepetida){
 
         $insertar = "INSERT INTO familia (familia, id_obra) VALUES('$nuevaFamilia','$idObra')";
@@ -30,11 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: Materiales.php?familiasError=Familia no insertado correctamente"); 
             exit();
         }
-       
-       
-
-
-
 
     }
 }
@@ -45,33 +41,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $nombreMaterial = $_POST["NombreMaterial"];
         $idFamilia = $_POST["id_familia"];
-        $importePesos = $_POST["importePesos"];
-        $importeDolares = $_POST["importeDolares"];
+        $importePesos = $_POST["importePesos"];if($importePesos == ""){$importePesos=0;}
+        $importeDolares = $_POST["importeDolares"];if($importeDolares == ""){$importeDolares=0;}
         $unidad = $_POST["unidad"];
 
         $resultadoMaterial = mysqli_query($conexion, "SELECT * FROM materiales WHERE material = '$nombreMaterial' AND id_obra = '$idObra'");
         $consulta = mysqli_fetch_array($resultadoMaterial);
-        $nuevamaterialRepetida = $consulta['material'];
-        if($nombreMaterial !== $nuevamaterialRepetida){
+        $nuevomaterialRepetido = $consulta['material'];
 
-        $hoy = getdate(); 
-        
+        if($nombreMaterial != $nuevomaterialRepetido){
 
-       
 
-        $insertar = "INSERT INTO materiales (material,id_familia,fechareg,id_obra, unidad) VALUES('$nombreMaterial',$idFamilia,'$hoy','$idObra','$unidad')";
-        $ejecutar = mysqli_query($conexion, $insertar);
+        $insertar = "INSERT INTO materiales (material,id_familia,id_obra,unidad,importe_pesos,importe_dolares) VALUES('$nombreMaterial',$idFamilia,'$idObra','$unidad',$importePesos,$importeDolares)";
+        $ejecutar = mysqli_query($conexion, $insertar);}
+        if($ejecutar){
         header("Location: Materiales.php?materialesSuccess=material insertado correctamente");
-        exit();                                       }else{
-
+        exit();                                       
+    }else{
             header("Location: Materiales.php?materialesError=Material no insertado"); 
             exit();
         }
-       
-       
-
-
-
 
     }
 }

@@ -6,13 +6,13 @@ $alias = $_SESSION['alias'];
 $obra = $_SESSION['nombreObra'];
 $idObra = $_SESSION['id_obra'];
 
-$idEstimacionDolar = $_REQUEST['id'];
+$idEstimacionPesos = $_REQUEST['id'];
 
-$SqlAplicarEstimacionDolar = "SELECT * FROM estimacion WHERE id_obra = '$idObra' and id_estimacion = $idEstimacionDolar";
+$SqlAplicarEstimacionDolar = "SELECT * FROM estimacion WHERE id_obra = '$idObra' and id_estimacion = $idEstimacionPesos";
 $queryActividad = mysqli_query($conexion, $SqlAplicarEstimacionDolar);
 
 $fila = mysqli_fetch_array($queryActividad);
-
+    
 ?>
 
 
@@ -67,53 +67,53 @@ $fila = mysqli_fetch_array($queryActividad);
                 </div>
             </div>
             <div class="card-body">
-                <form action="EditarEstimacionPesosBack.php" method="post">
-                    <div class="container p-1 mb-1">
-                        <?php if (isset($_GET['actividadSuccessEditar'])) { ?>
-                            <div class="alert alert-success text-center" role="alert" style="background-color: green; color:aliceblue;">
-                                <?php echo $_GET['actividadSuccessEditar'] ?>
-                            </div>
-                        <?php
-                        }
-                        ?>
-                        <?php if (isset($_GET['actividadErrorEditar'])) { ?>
-                            <div class="alert alert-danger text-center" role="alert" style="background-color: red; color:aliceblue;">
-                                <?php echo $_GET['actividadErrorEditar'] ?>
-                            </div>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                    <div class="row">
-                        <input class="form-control" type="hidden" value="<?php echo $fila['id_estimacion'] ?>" name="id_estimacion">
+                <form action="EditarestimacionesPesosBack.php" method="post">
+                        <div class="container p-1 mb-1">
+                            <?php if (isset($_GET['estimacionesSuccessEditar'])) { ?>
+                                <div class="alert alert-success text-center" role="alert" style="background-color: green; color:aliceblue;">
+                                    <?php echo $_GET['estimacionesSuccessEditar'] ?>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                            <?php if (isset($_GET['estimacionesErrorEditar'])) { ?>
+                                <div class="alert alert-danger text-center" role="alert" style="background-color: red; color:aliceblue;">
+                                    <?php echo $_GET['estimacionesErrorEditar'] ?>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                        <div class="row">
+                        <input class="form-control" type="hidden"  value="<?php echo $fila['id_estimacion'] ?>" placeholder="id Contratista" name="id_estimacion">
                         <div class="col">
-                            <label for="">Num estimacion dolares</label>
+                        <label for="">Num estimacion pesos</label>
                             <div class="input-group">
-                                <input class="form-control text-center" type="text" value="<?php echo $fila['numestimacion'] ?>" name="numestimacion">
+                                <input class="form-control text-center" type="text"  value="<?php echo $fila['numestimacion'] ?>" name="numestimacion">
                             </div>
                         </div>
                         <div class="col">
                             <label for="">Importe pesos</label>
                             <div class="input-group">
-                                <input class="form-control text-center" type="text" value="<?php echo $fila['importe_pesos'] ?>" name="importe_pesos">
+                                <input class="form-control text-center" type="text" value="<?php echo $fila['importe_pesos'] ?>"  name="importe_pesos">
                             </div>
                         </div>
                         <div class="col">
-                            <label for="">Amortizacion pesos</label>
+                        <label for="">Amortizacion pesos</label>
                             <div class="input-group">
-                                <input class="form-control text-center" type="text" value="<?php echo $fila['amort_pesos'] ?>" name="amort_pesos">
+                                <input class="form-control text-center" type="text" value="<?php echo $fila['amort_pesos'] ?>"  name="amort_pesos">
                             </div>
                         </div>
                         <div class="col">
-                            <label for="">Fondo de garantia pesos</label>
+                        <label for="">Fondo de garantia pesos</label>
                             <div class="input-group">
-                                <input class="form-control text-center" type="tel" value="<?php echo $fila['fg_pesos'] ?>" name="fg_pesos">
+                                <input class="form-control text-center" type="tel" value="<?php echo $fila['fg_pesos'] ?>"  name="fg_pesos">
                             </div>
                         </div>
                         <div class="col">
-                            <label for="">Factura pesos</label>
+                        <label for="">Factura pesos</label>
                             <div class="input-group">
-                                <input class="form-control text-center" type="tel" value="<?php echo $fila['factura_pesos'] ?>" name="factura_pesos">
+                                <input class="form-control text-center" type="tel" value="<?php echo $fila['factura_pesos'] ?>"  name="factura_pesos">
                             </div>
                         </div>
                         <div class="p-3">
@@ -122,7 +122,11 @@ $fila = mysqli_fetch_array($queryActividad);
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
+
+
 </body>
+
 </html>

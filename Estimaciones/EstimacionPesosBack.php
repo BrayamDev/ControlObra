@@ -6,13 +6,18 @@ include "../Conexion.php";
 $alias = $_SESSION['alias'];
 $obra = $_SESSION['nombreObra'];
 $idObra = $_SESSION['id_obra'];
-$_SESSION['contrato'] = $Contrato;
+$_SESSION['pagina'] = 1;
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["ImportarEstimacion"])) {
+       header("Location:../Presupuesto/importarPresupuestoPesos.php");
+
+    }}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["btnInsertarEstimacionPesos"])) {
         $idContratista = $_POST["cbx_concepto"];
         $importePesosContrato = $_POST["cbx_subconcepto"];
-        $importePesos = $_POST["importepesos"];
+        $importePesos = $_POST["importedolares"];if($importePesos==""){$importePesos=0;}
         $amortizacionPesos = $_POST["amortizacionpesos"];
         $fgPesos = $_POST["fgpesos"];
         $facturaPesos = $_POST["facturapesos"];
@@ -33,13 +38,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $SumaEstimaciones = $consulta1['importepesos'] + $importePesos;
 
         if ($SumaEstimaciones > $importePesosContrato) {
-            header("Location: AplicarEstimaciones.php?estimacionError=Con esta estimacion se sobrepasa el importe del contrato");
+            header("Location: AplicarEstimacionesdolares.php?estimacionError=Con esta estimacion se sobrepasa el importe del contrato");
             exit();
         }
 
-        $insertar = "INSERT INTO estimacion (importe_pesos,amort_pesos,fg_pesos,id_obra,id_contrato,numestimacion,factura_pesos) VALUES('$importePesos',$amortizacionPesos,'$fgPesos','$idObra','$Contrato','$numeroEstimacion','$facturaPesos')";
+      
+
+
+        $insertar = "INSERT INTO estimacion (importe_pesos,amort_pesos,fg_pesos,id_obra,id_contrato,numestimacion,fact_pesos) VALUES('$importePesos',$amortizacionPesos,'$fgPesos','$idObra','$Contrato','$numeroEstimacion','$facturaPesos')";
         $ejecutar = mysqli_query($conexion, $insertar);
-        header("Location: AplicarEstimaciones.php?estimacionSuccess=Estimacion insertada correctamente");
-        exit();
+        if ($importeDolares == ""){ header("Location: AplicarEstimaciones.php");}else{
+            header("Location: AplicarEstimaciones.php?estimacionSuccess=Estimacion insertada correctamente");
+            exit();
     }
-}
+}}

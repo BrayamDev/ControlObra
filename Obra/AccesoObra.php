@@ -31,7 +31,7 @@ $_SESSION['id_clientep'] = $idClienteP;
 
 <body>
     <div class="d-flex botones p-1">
-        <div class="me-auto p-2">
+    <div class="me-auto p-2">
             <strong>
                 <button href="" class="btn btn-light btn-sm" disabled="disabled">
                     <strong>Usuario :</strong>
@@ -40,14 +40,14 @@ $_SESSION['id_clientep'] = $idClienteP;
             </strong>
         </div>
         <div class="p-2">
-            <a href="../Login/CerrarSesion.php" class="btn btn-dark btn-sm"><i class="fa-solid fa-right-to-bracket"></i></a>
+                <a href="../Login/CerrarSesion.php" class="btn btn-dark btn-sm"><i class="fa-solid fa-right-to-bracket"></i></a>
         </div>
     </div>
     <div class="p-2 text-center text-white display-1 text-uppercase" style="background-color: #3C4857;">
         <h1>Control de obras</h1>
     </div>
 
-    <div class="container p-4">
+    <div class="container p-5">
         <div class="card text-center">
             <div class="card-header user_back">
                 <h2>Acceso a obra</h2>
@@ -81,7 +81,7 @@ $_SESSION['id_clientep'] = $idClienteP;
                                         $resultado = mysqli_query($conexion, "SELECT * FROM obra WHERE id_clientep = $idClienteP");
                                         while ($consulta = mysqli_fetch_array($resultado)) {
                                         ?>
-                                            <option value="<?php echo $consulta['id_obra'] ?>">
+                                            <option value="<?php echo $consulta['id_obra']?>">
                                                 <?php echo ucfirst($consulta['nombre']); ?>
                                             </option>
                                         <?php
@@ -132,3 +132,9 @@ $_SESSION['id_clientep'] = $idClienteP;
 
 </html>
 
+<?php
+// }else {
+//     header("Location: ../index.php?error=No tiene autorizacion de acceso");
+//     exit();
+// }
+?>

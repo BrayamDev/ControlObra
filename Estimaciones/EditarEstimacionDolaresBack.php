@@ -24,11 +24,11 @@ $sql = "UPDATE estimacion
     importe_dolares='$importe_dolares', 
     amort_dolares='$amort_dolares', 
     fg_dolares='$fg_dolares', 
-    factura_dolares='$factura_dolares' WHERE id_obra = '$idObra' AND id_estimacion = '$id_estimacion'";
+    factt_dolares='$factura_dolares' WHERE id_obra = '$idObra' AND id_estimacion = '$id_estimacion'";
 $query = mysqli_query($conexion, $sql);
 
 
-header("Location: AplicarEstimaciones.php?actividadSuccessEditar=La estimacion de dolares editada correctamente");
+header("Location: AplicarEstimacionesdolares.php?actividadSuccessEditar=La estimacion de dolares editada correctamente");
 exit();
 
 

@@ -6,13 +6,14 @@ include "../Conexion.php";
 $alias = $_SESSION['alias'];
 $obra = $_SESSION['nombreObra'];
 $idObra = $_SESSION['id_obra'];
+$_SESSION['pagina'] = 1;
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["btnInsertarEstimacionDolares"])) {
         $idContratista = $_POST["cbx_concepto"];
         $importeDolaresContrato = $_POST["cbx_subconcepto"];
-        $importeDolares = $_POST["importedolares"];
+        $importeDolares = $_POST["importedolares"];if($importeDolares==""){$importeDolares=0;}
         $amortizacionDolares = $_POST["amortizaciondolares"];
         $fgDolares = $_POST["fgdolares"];
         $facturaDolares = $_POST["facturadolares"];
@@ -37,10 +38,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
+      
+
 
         $insertar = "INSERT INTO estimacion (importe_dolares,amort_dolares,fg_dolares,id_obra,id_contrato,numestimacion,factura_dolares) VALUES('$importeDolares',$amortizacionDolares,'$fgDolares','$idObra','$Contrato','$numeroEstimacion','$facturaDolares')";
         $ejecutar = mysqli_query($conexion, $insertar);
+        if ($importeDolares == ""){ header("Location: AplicarEstimacionesdolares.php");}else{
             header("Location: AplicarEstimacionesdolares.php?estimacionSuccess=Estimacion insertada correctamente");
             exit();
     }
-}
+}}

@@ -8,11 +8,18 @@ $obra = $_SESSION['nombreObra'];
 $idObra = $_SESSION['id_obra'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if (isset($_POST["btnInsertarEstimacionPesos1"])) {
+
+    header("location: desplegarpresupuesto.php");
+
+
+  }}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (isset($_POST["btnInsertarEstimacionPesos"])) {
     $idContratista = $_POST["cbx_concepto"];
     $importePesosContrato = $_POST["cbx_subconcepto"];
 
-    $importePesosContrato = 100010;
+    
     $resultadoEstimacion = mysqli_query($conexion, "SELECT * FROM contrato WHERE id_obra = '$idObra' AND id_contratista = $idContratista AND importe_pesos = $importePesosContrato");
     $consulta = mysqli_fetch_array($resultadoEstimacion);
     $idContrato = $consulta['id_contrato'];

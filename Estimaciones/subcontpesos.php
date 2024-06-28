@@ -11,7 +11,7 @@ $consulta = mysqli_query($conexion, "SELECT * from  contrato WHERE id_obra= $id_
 
 $html = "<option value='0'></option>";
 while ($resultado = mysqli_fetch_array($consulta)) {
-	$html .= "<option value='" . $resultado['importe_pesos'] . "'>" . $resultado['importe_pesos'] . "</option>";
+	$html .= "<option value='" . $resultado['importe_pesos'] . "'>" .number_format($resultado['importe_pesos']) . "</option>";
 }
 
 echo strtoupper($html);

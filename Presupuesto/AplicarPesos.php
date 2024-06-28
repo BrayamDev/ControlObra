@@ -77,11 +77,7 @@ while ($resultado = mysqli_fetch_array($consulta))
             </div>
         </div>
         <div class="text-center p-2" style="background-color: #3C4857;">
-            <button type="button" class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Desplegar presupuesto
-                <i class="fa-solid fa-caret-down"></i>
-            </button>
-
+            <button class="btn btn-outline-light btn-sm" name="btnInsertarEstimacionPesos1" type="submit">Desplegar Presupuesto</button>
             <button class="btn btn-outline-light btn-sm" name="btnInsertarEstimacionPesos" type="submit">Insertar Presupuesto</button>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

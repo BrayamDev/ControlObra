@@ -155,16 +155,16 @@ while ($resultado = mysqli_fetch_array($consulta))
         </nav>
 
     </div>
-    <?php if (isset($_GET['contratoSuccess'])) { ?>
+    <?php if (isset($_GET['contratosSuccess'])) { ?>
         <div class="alert alert-success text-center" role="alert" style="background-color: green; color:aliceblue;">
-            <?php echo $_GET['contratoSuccess'] ?>
+            <?php echo $_GET['contratosSuccess'] ?>
         </div>
     <?php
     }
     ?>
-    <?php if (isset($_GET['contratoError'])) { ?>
+    <?php if (isset($_GET['contratosError'])) { ?>
         <div class="alert alert-error text-center" role="alert" style="background-color: green; color:aliceblue;">
-            <?php echo $_GET['contratoError'] ?>
+            <?php echo $_GET['contratosError'] ?>
         </div>
     <?php
     }
@@ -172,9 +172,6 @@ while ($resultado = mysqli_fetch_array($consulta))
     <br>
     <div class="container">
         <table class="table text-center" id="idTabla">
-            <div class="text-center bg-dark p-2 rounded text-white">
-                <h2>Consulta contratos</h2>
-            </div>
             <thead class="table table-dark">
                 <tr>
                     <th class="table__head">Contratista</th>
@@ -186,7 +183,8 @@ while ($resultado = mysqli_fetch_array($consulta))
                     <th class="table__head">Anticipo Dolares</th>
                     <th class="table__head">F.G. Pesos</th>
                     <th class="table__head">F.G. Dolares</th>
-                    <th class="table__head">Acciones</th>
+                    <th class="table__head">Editar</th>
+                    <th class="table__head">Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -210,6 +208,7 @@ while ($resultado = mysqli_fetch_array($consulta))
                     $resultadoidContratista = mysqli_query($conexion, "SELECT * FROM contrato WHERE id_obra = '$idObra' AND id_concepto = '$idConcepto' AND id_subconcepto = '$idSubconcepto'");
                     $consulta3 = mysqli_fetch_array($resultadoidContratista);
                     $idcontratista = $consulta3['id_contratista'];
+                    $idContrato = $consulta3['id_contrato'];
                     $resultadoContratista = mysqli_query($conexion, "SELECT * FROM contratista WHERE id_obra = '$idObra' AND id_contratista = '$idcontratista'");
                     $consulta4 = mysqli_fetch_array($resultadoContratista);
                     $contratista = $consulta4['aliascontratista'];
@@ -217,18 +216,21 @@ while ($resultado = mysqli_fetch_array($consulta))
 
                 ?>
                     <tr>
-                        <td><?php echo $contratista; ?></td>
-                        <td><?php echo $Concepto; ?></td>
-                        <td><?php echo $Subconcepto; ?></td>
-                        <td><?php echo $importePesos; ?></td>
-                        <td><?php echo $importeDolares; ?></td>
-                        <td><?php echo $anticipoPesos; ?></td>
-                        <td><?php echo $anticipoDolares; ?></td>
-                        <td><?php echo $fgPesos; ?></td>
-                        <td><?php echo $fgDolares; ?></td>
-                        <td>
+                        <td class="table__data"><?php echo $contratista; ?></td>
+                        <td class="table__data"><?php echo $Concepto; ?></td>
+                        <td class="table__data"><?php echo $Subconcepto; ?></td>
+                        <td class="table__data"><?php echo number_format($importePesos); ?></td>
+                        <td class="table__data"><?php echo number_format($importeDolares); ?></td>
+                        <td class="table__data"><?php echo number_format($anticipoPesos); ?></td>
+                        <td class="table__data"><?php echo number_format($anticipoDolares); ?></td>
+                        <td class="table__data"><?php echo number_format($fgPesos); ?></td>
+                        <td class="table__data"><?php echo number_format($fgDolares); ?></td>
+                        <td class="table__data">
+
                             <a href="" class="btn-sm btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
-                            <a href="" class="btn-sm btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        <td class="table__data">
+                        <a href="EliminarContrato.php?id_contrato=<?php echo $consulta3['id_contrato'] ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 <?php } ?>

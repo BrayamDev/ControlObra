@@ -23,6 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $facturaDolares = $_POST["facturadolares"];
         $idContratista = $_POST["id_contratista"];
 
+        if($idContratista > 0){
+
         $resultadoContrato = mysqli_query($conexion, "SELECT * FROM contrato WHERE id_concepto = '$idConcepto' AND id_subconcepto = 'idSubconcepto' AND  id_contratista = '$idContratista' AND id_obra = '$idObra'");
         $consulta = mysqli_fetch_array($resultadoContrato);
         $ContratoRepetido = $consulta['id_contrato'];
@@ -60,7 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 }else{
 
             
-
        
         $insertar = "INSERT INTO contrato (importe_pesos,importe_dolares,anticipo_pesos,anticipo_dolares,fgpesos,fgdolares,id_concepto,id_subconcepto,id_obra,id_contratista) VALUES('$importePesos',$importeDolares,'$anticipoPesos','$anticipoDolares','$fgPesos',' $fgDolares','$idConcepto',' $idSubconcepto','$idObra',' $idContratista ')";
         $ejecutar = mysqli_query($conexion, $insertar);
@@ -68,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();          
 
         
-                                                 }
+    }      }
 
        
     }}

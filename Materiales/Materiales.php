@@ -17,7 +17,7 @@ while ($resultado = mysqli_fetch_array($consulta))
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--fontawesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -27,12 +27,14 @@ while ($resultado = mysqli_fetch_array($consulta))
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!--cdn-->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
-    <title>Familias</title>
     <script language="javascript" src="../js/jquery-3.1.1.min.js"></script>
+    <title>Control de obra</title>
 </head>
 
 <body>
-    <?php include("../Global/Header.php") ?>
+<?php include ("../Global/Header.php")?>
+    
+  
     <div class="control__partida--links">
         <nav>
             <form action="../Materiales/MaterialesBack.php" method="POST">
@@ -58,7 +60,7 @@ while ($resultado = mysqli_fetch_array($consulta))
                                     <div>
                                         <div class="partidas--dropdown">
                                             <select class="form-control" name="id_familia" id="id_familia">
-                                                <option value="#" selected="true" disabled>--Seleccione la Partida--</option>
+                                                <option value="#" selected="true" disabled>--Seleccione Familia--</option>
                                                 <?php
                                                 $resultado = mysqli_query($conexion, "SELECT * FROM familia WHERE id_obra = $idObra");
                                                 while ($consulta = mysqli_fetch_array($resultado)) {
@@ -75,12 +77,12 @@ while ($resultado = mysqli_fetch_array($consulta))
                                 </div>
                                 <div class="col">
                                     <div class="campo-partidas">
-                                        <input class="form-control" type="text" placeholder="Material" name="NombreMaterial">
+                                        <input class="form-control" type="text" placeholder="material" name="NombreMaterial">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="campo-partidas">
-                                        <input class="form-control" type="text" placeholder="Unidad" name="unidad">
+                                        <input class="form-control" type="text" placeholder="unidad" name="unidad">
                                     </div>
                                 </div>
 
@@ -105,17 +107,17 @@ while ($resultado = mysqli_fetch_array($consulta))
                 </div>
             </form>
             <div class="container p-1 mb-1">
-                <?php if (isset($_GET['familiasSuccess'])) { ?>
+                <?php if (isset($_GET['materialesSuccess'])) { ?>
                     <div class="alert alert-success text-center" role="alert" style="background-color: green; color:aliceblue;">
-                        <?php echo $_GET['familiasSuccess'] ?>
+                        <?php echo $_GET['materialesSuccess'] ?>
 
                     </div>
                 <?php
                 }
                 ?>
-                <?php if (isset($_GET['familiasError'])) { ?>
+                <?php if (isset($_GET['materialesError'])) { ?>
                     <div class="alert alert-danger text-center" role="alert" style="background-color: red; color:aliceblue;">
-                        <?php echo $_GET['familiasError'] ?>
+                        <?php echo $_GET['materialesError'] ?>
                     </div>
                 <?php
                 }
@@ -123,11 +125,11 @@ while ($resultado = mysqli_fetch_array($consulta))
             </div>
         </nav>
     </div>
+    <div class="text-center">
+        <h2> Lista de Materiales</h2>
+    </div>
     <div class="container">
         <table class="table table-striped" id="idTabla">
-            <div class="text-center bg-dark p-2 rounded text-white">
-                <h2>Lista de Materiales</h2>
-            </div>
             <thead class="table-dark">
                 <tr>
                     <th>Familial</th>
@@ -135,7 +137,8 @@ while ($resultado = mysqli_fetch_array($consulta))
                     <th>Unidad</th>
                     <th>Importe Pesos</th>
                     <th>Importe Dolares</th>
-                    <th>Acciones</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -159,14 +162,17 @@ while ($resultado = mysqli_fetch_array($consulta))
                         <td><?php echo $resultado1['importe_pesos']; ?></td>
                         <td><?php echo $resultado1['importe_dolares']; ?></td>
                         <td>
-                            <a href="" class="btn btn-warning btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
-                            <a href="" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                            <a href="" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a>
                         </td>
-                    <?php } ?>
+                        <td class="table__data">
+                            <a href="" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        </td><?php    }  ?>
                     </tr>
             </tbody>
         </table>
     </div>
+
+
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -185,7 +191,6 @@ while ($resultado = mysqli_fetch_array($consulta))
     <!--boostrap5-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-
 </body>
 
 </html>
